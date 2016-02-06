@@ -177,7 +177,7 @@ def meta_handler(tag, output, indent, handlers):
 
 
 def convert_file(filename, handlers):
-    soup = BreveBeautifulSoup(file(filename, 'rU'),
+    soup = BreveBeautifulSoup(open(filename, 'rU'),
                               convertEntities=BeautifulSoup.HTML_ENTITIES)
     output = []
     convert(soup.html, output, handlers=handlers)

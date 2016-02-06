@@ -126,6 +126,6 @@ if __name__ == '__main__':
 
     p = Html2Breve()
     html = '\n'.join([l.strip()
-                      for l in file(sys.argv[1], 'rU').readlines()])
+                      for l in open(sys.argv[1], 'rU').readlines()])
     p.feed(html)
     p.close()

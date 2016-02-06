@@ -19,8 +19,8 @@ def diff(actual, expected):
 def log_output(actual, expected):
     ''' not used '''
     test_name = callers_name()
-    file('tmp/%s-actual.html' % test_name, 'w').write(actual)
-    file('tmp/%s-expected.html' % test_name, 'w').write(expected)
+    open('tmp/%s-actual.html' % test_name, 'w').write(actual)
+    open('tmp/%s-expected.html' % test_name, 'w').write(expected)
 
 
 def my_name():
@@ -44,4 +44,4 @@ def template_root():
 
 
 def expected_output():
-    return file(os.path.join(test_root(), 'output', '%s.html' % callers_name())).read().strip().decode('utf8')
+    return open(os.path.join(test_root(), 'output', '%s.html' % callers_name())).read().strip().decode('utf8')

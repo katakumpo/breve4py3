@@ -38,7 +38,7 @@ class Soup2BreveTestCase(unittest.TestCase):
         _globals.update(tags)
 
         actual = flatten(eval(code_object, _globals))
-        expected = file(os.path.join(test_root(), 'html/index.html')).read()
+        expected = open(os.path.join(test_root(), 'html/index.html')).read()
 
         try:
             # we can't actually round trip because attributes never come out in

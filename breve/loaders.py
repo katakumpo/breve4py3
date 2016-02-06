@@ -10,4 +10,4 @@ class FileLoader(object):
         return uid, timestamp
 
     def load(self, uid):
-        return file(uid, 'U').read()
+        return open(uid, 'U').read()

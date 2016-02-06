@@ -434,7 +434,7 @@ class TemplateTestCase(unittest.TestCase):
                 raise OSError, 'No such file or directory %s' % template
 
             def load(self, uid):
-                return file(uid, 'U').read()
+                return open(uid, 'U').read()
 
         loader = PathLoader(
             template_root(),
@@ -476,7 +476,7 @@ class TemplateTestCase(unittest.TestCase):
                 raise OSError, 'No such file or directory %s' % template
 
             def load(self, uid):
-                return file(uid, 'U').read()
+                return open(uid, 'U').read()
 
         loader = PathLoader(
             template_root(),
