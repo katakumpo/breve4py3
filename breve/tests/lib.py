@@ -44,4 +44,4 @@ def template_root():
 
 
 def expected_output():
-    return open(os.path.join(test_root(), 'output', '%s.html' % callers_name())).read().strip().decode('utf8')
+    return open(os.path.join(test_root(), 'output', '%s.html' % callers_name())).read().strip()
