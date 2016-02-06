@@ -10,14 +10,14 @@ Brevé supports the Buffet template engine API which means it works automaticall
 
 A short example::
 
- html [
-     head [
-         title [ 'A Brevé Template' ]
+ html[
+     head[
+         title['A Brevé Template']
      ],
 
-     body [
-         h1 [ 'Briefly, Brevé' ], br,
-         div ( style = 'text-align: center;' ) [
+     body[
+         h1['Briefly, Brevé'], br,
+         div(style='text-align: center;')[
              span [ '''
                  As you can see, Brevé maps very
                  directly to the final HTML output.

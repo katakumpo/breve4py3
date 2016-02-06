@@ -1,28 +1,31 @@
 #
 # registry of flatteners
 #
-__registry = { }
+__registry = {}
 
-def register_flattener ( o, f ):
-    __registry [ o ] = f
-    
-def unregister_flattener ( o ):
+
+def register_flattener(o, f):
+    __registry[o] = f
+
+
+def unregister_flattener(o):
     try:
-        del __registry [ o ]
+        del __registry[o]
     except KeyError:
         pass
 
-def registry ( ):
+
+def registry():
     '''mostly for debugging'''
-    return __registry 
+    return __registry
 
-def get_registered_flattener ( o ):
-    return __registry [ o ]
 
-def flatten ( o ):
+def get_registered_flattener(o):
+    return __registry[o]
+
+
+def flatten(o):
     try:
-        return __registry [ type ( o ) ] ( o )
+        return __registry[type(o)](o)
     except KeyError:
-        return unicode ( o )
-
-    
+        return unicode(o)
