@@ -11,7 +11,7 @@ strict_doctype = '''<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://ww
 # a class to handle empty tags in html4 format
 
 
-class Html4EmptyTag (EmptyTag):
+class Html4EmptyTag(EmptyTag):
     pass
 
 
@@ -25,7 +25,7 @@ def flatten_empty_html4_tag(o):
 register_flattener(Html4EmptyTag, flatten_empty_html4_tag)
 
 
-class Html4EmptyProto (HtmlEmptyProto):
+class Html4EmptyProto(HtmlEmptyProto):
     Class = Html4EmptyTag
     pass
 

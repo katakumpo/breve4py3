@@ -4,7 +4,7 @@ from breve.tags import html
 from urllib import splitquery
 
 
-class BreveTemplatePlugin (object):
+class BreveTemplatePlugin(object):
     """
     Breve Template Plugin for Buffet-compatible frameworks
     Tested with TurboGears and Pylons

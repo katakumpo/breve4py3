@@ -19,7 +19,7 @@ from breve.util import Namespace
 from breve.tests.lib import my_name
 
 
-class SerializationTestCase (unittest.TestCase):
+class SerializationTestCase(unittest.TestCase):
 
     def test_tag_serialization(self):
         '''basic tag flattening'''
@@ -149,7 +149,7 @@ class SerializationTestCase (unittest.TestCase):
                 T.div(style='width: 400px;<should be &escaped&>')[
                     T.p(class_='foo')['&&&'],
                     T.p['Coffee', E.nbsp, E.amp, E.nbsp, 'cream'],
-                    xml ( '''<div>this should be <u>unescaped</u> &amp; unaltered.</div>''' )
+                    xml ('''<div>this should be <u>unescaped</u> &amp; unaltered.</div>''')
                 ]
             ]
         ]
@@ -212,7 +212,7 @@ class SerializationTestCase (unittest.TestCase):
         )
 
 
-class MacrosTestCase (unittest.TestCase):
+class MacrosTestCase(unittest.TestCase):
 
     def test_macros(self):
         '''test macros'''
@@ -371,7 +371,7 @@ class MacrosTestCase (unittest.TestCase):
         )
 
 
-class DOMTestCase (unittest.TestCase):
+class DOMTestCase(unittest.TestCase):
 
     def test_dom_traversal(self):
         '''tag.walk() DOM traversal'''
@@ -426,7 +426,7 @@ class DOMTestCase (unittest.TestCase):
                     T.div(class_='text', id='main-content')[
                         T.img(src='/images/breve-logo.png', alt='breve logo'),
                         T.br,
-                        T.span ( class_='bold' ) [ '''Hello from Breve!''' ]
+                        T.span (class_='bold') [ '''Hello from Breve!''' ]
                     ]
                 ), css_results(selectors)]
             ]
@@ -445,7 +445,7 @@ class DOMTestCase (unittest.TestCase):
         )
 
 
-class CustomTagsTestCase (unittest.TestCase):
+class CustomTagsTestCase(unittest.TestCase):
 
     def test_custom_tags(self):
         '''custom tags'''

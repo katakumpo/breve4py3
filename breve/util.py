@@ -1,7 +1,7 @@
 import sys
 
 
-class Namespace (object):
+class Namespace(object):
     __slots__ = ['_dict']
 
     def __init__(self, values=None):
@@ -67,7 +67,7 @@ def caller():
     return sys._getframe(2)
 
 
-class PrettyPrinter (object):
+class PrettyPrinter(object):
     '''not happy with this - should happen at the flattener level'''
 
     def __init__(self, indent=2):

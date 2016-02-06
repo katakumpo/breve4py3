@@ -1,7 +1,7 @@
 import os
 
 
-class FileLoader (object):
+class FileLoader(object):
     __slots__ = []
 
     def stat(self, template, root):

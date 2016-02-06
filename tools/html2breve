@@ -4,7 +4,7 @@ from HTMLParser import HTMLParser
 import sys
 
 
-class Html2Breve (HTMLParser):
+class Html2Breve(HTMLParser):
     __depth = 0
     __indent = 4
     __injs = False

@@ -15,7 +15,7 @@ def test(condition):
     return condition or ''
 
 
-class Macro (object):
+class Macro(object):
 
     def __init__(self, name, function):
         self.name = name
@@ -47,14 +47,14 @@ def let(**kw):
     return ''
 
 
-class AutoTag (object):
+class AutoTag(object):
     '''dynamically create tags'''
 
     def __getattr__(self, name):
         return Tag(name)
 
 
-class Tag (object):
+class Tag(object):
     __slots__ = ['name', 'children', 'attrs', 'render', 'data', 'args']
 
     def __init__(self, name, *args, **kw):
@@ -136,7 +136,7 @@ class Tag (object):
         return self
 
 
-class Proto (unicode):
+class Proto(unicode):
     __slots__ = ['Class']
     Class = Tag
 
@@ -150,7 +150,7 @@ class Proto (unicode):
         return unicode(self.Class(self))
 
 
-class cdata (unicode):
+class cdata(unicode):
 
     def __init__(self, children):
         self.children = children
@@ -159,7 +159,7 @@ class cdata (unicode):
         return u'<![CDATA[%s]]>' % self.children
 
 
-class Invisible (Tag):
+class Invisible(Tag):
     pass
 
 
@@ -174,12 +174,12 @@ def flatten_invisible(o):
     return u''
 
 
-class _invisible (Proto):
+class _invisible(Proto):
     Class = Invisible
 invisible = _invisible('invisible')
 
 
-class xml (unicode):
+class xml(unicode):
     pass
 
 
@@ -187,7 +187,7 @@ def flatten_xml(o):
     return o
 
 
-class comment (unicode):
+class comment(unicode):
     pass
 
 
@@ -258,8 +258,8 @@ def custom_tag(tag_name, class_name=None, flattener=flatten_tag, attrs=None):
     def __init__(self, *args, **kw):
         Tag.__init__(self, tag_name, **attrs)
 
-    TagClass = type("c_%sTag" % class_name, (Tag, ), {'__init__': __init__})
-    ProtoClass = type("c_%sProto" % class_name, (Proto, ), {'Class': TagClass})
+    TagClass = type("c_%sTag" % class_name, (Tag,), {'__init__': __init__})
+    ProtoClass = type("c_%sProto" % class_name, (Proto,), {'Class': TagClass})
     register_flattener(ProtoClass, lambda o: flattener(o()))
     register_flattener(TagClass, flattener)
 

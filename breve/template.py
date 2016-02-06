@@ -23,7 +23,7 @@ _cache = Cache()
 _loader = FileLoader()
 
 
-class Template (object):
+class Template(object):
     cgitb = True
     tidy = False
     debug = False
@@ -45,7 +45,7 @@ class Template (object):
         '''
         T._update_params(**kw)
 
-        class inherits (Tag):
+        class inherits(Tag):
 
             def __str__(self):
                 return T.render_partial(
@@ -54,14 +54,14 @@ class Template (object):
                                if isinstance(c, override)]
                 )
 
-        class override (Tag):
+        class override(Tag):
 
             def __str__(self):
                 if self.children:
                     return u''.join([flatten(c) for c in self.children])
                 return u''
 
-        class slot (Tag):
+        class slot(Tag):
 
             def __str__(self):
                 if self.name in T.fragments:
@@ -106,7 +106,7 @@ class Template (object):
             T.tags[T.autotags] = AutoTag()
 
     def include(T, template, vars=None, loader=None):
-        ''' 
+        '''
         evalutes template fragment(s) in the current (caller's) context
         '''
         if type(template) is types.StringType:

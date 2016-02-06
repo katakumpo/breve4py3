@@ -18,7 +18,7 @@ from breve.globals import push, pop, get_stacks
 from breve.tests.lib import diff, template_root, my_name, expected_output
 
 
-class TemplateTestCase (unittest.TestCase):
+class TemplateTestCase(unittest.TestCase):
 
     def test_instantiation_parameters(self):
         '''test instantiation parameters'''
@@ -418,7 +418,7 @@ class TemplateTestCase (unittest.TestCase):
     def test_custom_loader(self):
         '''custom loader'''
 
-        class PathLoader (object):
+        class PathLoader(object):
             __slots__ = ['paths']
 
             def __init__(self, *paths):
@@ -460,7 +460,7 @@ class TemplateTestCase (unittest.TestCase):
     def test_custom_loader_stack(self):
         '''custom loader stack'''
 
-        class PathLoader (object):
+        class PathLoader(object):
             __slots__ = ['paths']
 
             def __init__(self, *paths):
@@ -518,7 +518,7 @@ class TemplateTestCase (unittest.TestCase):
             raise
 
 
-class TemplateMemoryTestCase (unittest.TestCase):
+class TemplateMemoryTestCase(unittest.TestCase):
 
     def test_let_memory_freed(self):
         '''test that let() objects are freed'''

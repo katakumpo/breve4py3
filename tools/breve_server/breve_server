@@ -44,7 +44,7 @@ def reconstruct_url(environ):
     return url
 
 
-class WSGIFileServerApplication (object):
+class WSGIFileServerApplication(object):
     """Application to serve out windmill provided"""
 
     #   Copyright (c) 2006-2007 Open Source Applications Foundation
@@ -135,7 +135,7 @@ class WSGIFileServerApplication (object):
         return self.handler(environ, start_response)
 
 
-class BreveApp (object):
+class BreveApp(object):
 
     def __init__(self, options, args):
         self.fileserver = WSGIFileServerApplication(options.document_root, '/')

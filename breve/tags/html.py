@@ -13,7 +13,7 @@ doctype = '''<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
 #
 
 
-class HtmlProto (unicode):
+class HtmlProto(unicode):
     __slots__ = []
 
     def __call__(self, **kw):
@@ -67,7 +67,7 @@ empty_tag_names = [
 ]
 
 
-class inlineJS (unicode):
+class inlineJS(unicode):
 
     def __init__(self, children):
         self.children = children
@@ -78,7 +78,7 @@ def flatten_inlineJS(o):
 register_flattener(inlineJS, flatten_inlineJS)
 
 
-class minJS (unicode):
+class minJS(unicode):
 
     def __init__(self, children):
         self.children = jsmin(children)
@@ -115,7 +115,7 @@ def flatten_option(o):
 option = custom_tag('option', flattener=flatten_option)
 
 
-class lorem_ipsum (Tag):
+class lorem_ipsum(Tag):
     ''' silliness ensues '''
     children = [
         'Lorem ipsum dolor sit amet, consectetuer adipiscing elit.',

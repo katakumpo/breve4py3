@@ -18,7 +18,7 @@ def flatten_string(obj):
     return unicode(obj).encode(settings.DEFAULT_CHARSET)
 
 
-class _loader (object):
+class _loader(object):
 
     def __init__(self, root, breve_opts=None):
         self.breve_opts = breve_opts or {}
@@ -33,7 +33,7 @@ class _loader (object):
                                breve_opts=self.breve_opts)
 
 
-class TemplateAdapter (object):
+class TemplateAdapter(object):
     """
     Takes the root and a list of filenames of a breve templates in the
     constructor and returns an object that behaves as a

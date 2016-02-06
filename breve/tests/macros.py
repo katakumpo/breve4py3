@@ -18,7 +18,7 @@ from breve.util import Namespace
 from breve.tests.lib import my_name
 
 
-class MacrosTestCase (unittest.TestCase):
+class MacrosTestCase(unittest.TestCase):
 
     def test_autotable_macro(self):
         '''test autotable macro'''

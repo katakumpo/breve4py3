@@ -1,7 +1,7 @@
 from time import time
 
 
-class Cache (object):
+class Cache(object):
     __slots__ = ['ccache', 'scache', 'loader']
 
     def __init__(self):

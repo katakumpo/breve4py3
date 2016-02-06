@@ -2,7 +2,7 @@ from breve.flatten import register_flattener
 from breve.util import Namespace
 
 
-class Entity (str):
+class Entity(str):
 
     def __init__(self, args):
         self.name, self.value = args

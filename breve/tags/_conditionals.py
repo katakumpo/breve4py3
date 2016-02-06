@@ -1,4 +1,4 @@
-class switch (object):
+class switch(object):
 
     def __init__(self, value):
         self.value = value
@@ -10,7 +10,7 @@ class switch (object):
         return ''
 
 
-class case (object):
+class case(object):
 
     def __init__(self, value=None, default=False):
         self.default = default
@@ -26,7 +26,7 @@ class case (object):
 default = case(default=True)
 
 
-class when (object):
+class when(object):
 
     def __init__(self, condition):
         self.value = bool(condition)
