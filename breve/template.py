@@ -78,7 +78,7 @@ class Template(object):
         T.fragments = {}
         T.render_path = []  # not needed but potentially useful
 
-        T.vars = Namespace({'xmlns': xmlns})
+        T.params = Namespace({'xmlns': xmlns})
         T.tags = {'cdata': cdata,
                   'xml': xml,
                   'check': check,
@@ -102,7 +102,7 @@ class Template(object):
         if T.autotags:
             T.tags[T.autotags] = AutoTag()
 
-    def include(T, template, vars=None, loader=None):  # @NoSelf @ReservedAssignment
+    def include(T, template, params=None, loader=None):  # @NoSelf
         """
         evalutes template fragment(s) in the current (caller's) context
         """
@@ -112,8 +112,8 @@ class Template(object):
         results = []
         for tpl in template:
             locals_ = {}
-            if vars:
-                locals_.update(vars)
+            if params:
+                locals_.update(params)
             frame = caller()
             filename = "%s.%s" % (tpl, T.extension)
             if loader:
@@ -127,34 +127,34 @@ class Template(object):
             results.append(result)
         return results
 
-    # def old_include ( T, template, vars = None, loader = None ):
+    # def old_include(T, template, params=None, loader=None):
     #     """
     #     evalutes a template fragment in the current (caller's) context
     #     """
-    #     locals = { }
-    #     if vars:
-    #         locals.update ( vars )
-    #     frame = caller ( )
-    #     filename = "%s.%s" % ( template, T.extension )
+    #     locals = {}
+    #     if params:
+    #         locals.update(params)
+    #     frame = caller()
+    #     filename = "%s.%s" % (template, T.extension)
     #     if loader:
-    #         T.loaders.append ( loader )
+    #         T.loaders.append(loader)
     #     try:
-    #         code = _cache.compile ( filename, T.root, T.loaders [ -1 ] )
-    #         result = eval ( code, frame.f_globals, locals )
+    #         code = _cache.compile(filename, T.root, T.loaders[-1])
+    #         result = eval(code, frame.f_globals, locals)
     #     finally:
     #         if loader:
-    #             T.loaders.pop ( )
+    #             T.loaders.pop()
     #     return result
 
-    def _evaluate(T, template, fragments=None, vars=None, loader=None, **kw):  # @NoSelf @ReservedAssignment
+    def _evaluate(T, template, fragments=None, params=None, loader=None, **kw):  # @NoSelf
         filename = "%s.%s" % (template, T.extension)
 
         T._update_params(**kw)
 
         T.render_path.append(template)
-        T.vars['__this__'] = T
-        T.vars['__templates__'] = T.render_path
-        T.vars['__namespace'] = T.namespace
+        T.params['__this__'] = T
+        T.params['__templates__'] = T.render_path
+        T.params['__namespace'] = T.namespace
 
         if loader:
             T.loaders.append(loader)
@@ -164,18 +164,18 @@ class Template(object):
                 if f.name not in T.fragments:
                     T.fragments[f.name] = f
 
-        T.vars._dict.update(get_globals())
+        T.params._dict.update(get_globals())
         _g = {}
         _g.update(T.tags)
         if T.namespace:
-            if not T.namespace in T.vars:
-                T.vars[T.namespace] = Namespace()
-            if vars:
-                T.vars[T.namespace]._dict.update(vars)
+            if not T.namespace in T.params:
+                T.params[T.namespace] = Namespace()
+            if params:
+                T.params[T.namespace]._dict.update(params)
         else:
-            if vars:
-                T.vars._dict.update(vars)
-        _g.update(T.vars)
+            if params:
+                T.params._dict.update(params)
+        _g.update(T.params)
 
         try:
             bytecode = _cache.compile(filename, T.root, T.loaders[-1])
@@ -187,9 +187,9 @@ class Template(object):
 
         return result
 
-    def render_partial(T, template, fragments=None, vars=None, loader=None, **kw):  # @NoSelf @ReservedAssignment
+    def render_partial(T, template, fragments=None, params=None, loader=None, **kw):  # @NoSelf
         try:
-            result = T._evaluate(template, fragments, vars, loader, **kw)
+            result = T._evaluate(template, fragments, params, loader, **kw)
             output = flatten(result)
         except:
             if T.debug:
@@ -212,10 +212,10 @@ class Template(object):
             # return p.parse ( output )
             return output
 
-    def render(T, template, vars=None, loader=None, fragment=False, **kw):  # @NoSelf @ReservedAssignment
+    def render(T, template, params=None, loader=None, fragment=False, **kw):  # @NoSelf
         if loader:
             T.loaders.append(loader)
-        output = T.render_partial(template, vars=vars, **kw)
+        output = T.render_partial(template, params=params, **kw)
         if loader:
             T.loaders.pop()
         if fragment:

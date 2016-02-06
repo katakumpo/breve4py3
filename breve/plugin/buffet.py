@@ -13,12 +13,12 @@ class BreveTemplatePlugin(object):
     extension = "b"
     tag_defs = {'html': html}
 
-    def __init__(self, extra_vars_func=None, options=None):
-        self.get_extra_vars = extra_vars_func
+    def __init__(self, extra_params_func=None, options=None):
+        self.get_extra_params = extra_params_func
         self.options = options or {}
         self.breve_opts = {}
 
-    def get_config(self, vars):  # @ReservedAssignment
+    def get_config(self, params):
         """
         Different frameworks provide needed config info at different times
         and in different ways (notably TurboGears and Pylons), so I've wrapped
@@ -38,8 +38,8 @@ class BreveTemplatePlugin(object):
             'tidy': False
         }
 
-        if 'std' in vars and 'config' in vars['std']:  # turbogears-specific hacks
-            cfg = vars['std']['config']
+        if 'std' in params and 'config' in params['std']:  # turbogears-specific hacks
+            cfg = params['std']['config']
             breve_opts['root'] = cfg('breve.root', breve_opts['root'])
             breve_opts['namespace'] = cfg('breve.namespace', breve_opts['namespace'])
             breve_opts['debug'] = cfg('breve.debug', breve_opts['debug'])
@@ -82,13 +82,13 @@ class BreveTemplatePlugin(object):
         template == dotted.path.to.template (without .ext)
         """
 
-        vars = info  # @ReservedAssignment
+        params = info
 
-        # check to see if we were passed a function get extra vars
-        if callable(self.get_extra_vars):
-            vars.update(self.get_extra_vars())
+        # check to see if we were passed a function get extra params
+        if callable(self.get_extra_params):
+            params.update(self.get_extra_params())
 
-        self.breve_opts.update(self.get_config(vars))
+        self.breve_opts.update(self.get_config(params))
         template_path, template_filename, args = self.load_template(template)
         # self.breve_opts.update ( args )
 
@@ -112,7 +112,7 @@ class BreveTemplatePlugin(object):
 
         if fragment:
             return template_obj.render_partial(os.path.join(template_path, template_filename),
-                                               vars=vars, **self.breve_opts)
+                                               params=params, **self.breve_opts)
 
         return template_obj.render(os.path.join(template_path, template_filename),
-                                   vars=vars, **self.breve_opts)
+                                   params=params, **self.breve_opts)

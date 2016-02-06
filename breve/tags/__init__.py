@@ -138,17 +138,14 @@ class Tag(object):
 
 
 class Proto(str):
-    __slots__ = ['Class']
-    Class_ = Tag
+    Class = Tag
 
     def __call__(self, **kw):
-        return self.Class_(self)(**kw)
+        return self.Class(self)(**kw)
 
     def __getitem__(self, children):
-        return self.Class_(self)[children]
+        return self.Class(self)[children]
 
-    def __str__(self):
-        return str(self.Class_(self))
 
 
 class cdata(str):

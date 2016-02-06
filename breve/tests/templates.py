@@ -35,7 +35,7 @@ class TemplateTestCase(unittest.TestCase):
     def test_render_parameters(self):
         """test render-time parameters"""
 
-        _vars = dict(
+        params = dict(
             message='hello, from breve',
             title=my_name()
         )
@@ -46,19 +46,19 @@ class TemplateTestCase(unittest.TestCase):
             'extension': '.breve'
         }
         t = Template(html, root=template_root())
-        t.render('index', vars, **args)
+        t.render('index', params, **args)
         for k, v in args.items():
             self.failUnless(getattr(t, k) == v)
 
     def test_simple_template(self):
         """simple template"""
 
-        _vars = dict(
+        params = dict(
             message='hello, from breve',
             title=my_name()
         )
         t = Template(html, root=template_root())
-        actual = t.render('index', vars, namespace='v')
+        actual = t.render('index', params, namespace='v')
         expected = expected_output()
         try:
             self.assertEqual(actual, expected)
@@ -69,12 +69,12 @@ class TemplateTestCase(unittest.TestCase):
     def test_include(self):
         """include() directive"""
 
-        _vars = dict(
+        params = dict(
             message='hello, from breve',
             title=my_name()
         )
         t = Template(html, root=template_root())
-        actual = t.render('index', vars, namespace='v')
+        actual = t.render('index', params, namespace='v')
         expected = expected_output()
         try:
             self.assertEqual(actual, expected)
@@ -85,12 +85,12 @@ class TemplateTestCase(unittest.TestCase):
     def test_nested_include(self):
         """nested include() directives"""
 
-        _vars = dict(
+        params = dict(
             message='hello, from breve',
             title=my_name()
         )
         t = Template(html, root=template_root())
-        actual = t.render('index', vars, namespace='v')
+        actual = t.render('index', params, namespace='v')
         expected = expected_output()
         try:
             self.assertEqual(actual, expected)
@@ -101,12 +101,12 @@ class TemplateTestCase(unittest.TestCase):
     def test_loop_include(self):
         """looping over include() with listcomp"""
 
-        _vars = dict(
+        params = dict(
             message='hello, from breve',
             title=my_name()
         )
         t = Template(html, root=template_root())
-        actual = t.render('index', vars, namespace='v')
+        actual = t.render('index', params, namespace='v')
         expected = expected_output()
         try:
             self.assertEqual(actual, expected)
@@ -117,12 +117,12 @@ class TemplateTestCase(unittest.TestCase):
     def test_let_directive(self):
         """test let directive"""
 
-        _vars = dict(
+        params = dict(
             message='hello, from breve',
             title=my_name()
         )
         t = Template(html, root=template_root())
-        actual = t.render('index', vars, namespace='v')
+        actual = t.render('index', params, namespace='v')
         expected = expected_output()
         try:
             self.assertEqual(actual, expected)
@@ -133,7 +133,7 @@ class TemplateTestCase(unittest.TestCase):
     def test_let_directive_scope(self):
         """test let directive's scope"""
 
-        _vars = dict(
+        params = dict(
             message='hello, from breve',
             title=my_name(),
             do_fail=False
@@ -141,7 +141,7 @@ class TemplateTestCase(unittest.TestCase):
 
         # don't fail - use variable in scope
         t = Template(html, root=template_root())
-        actual = t.render('index', vars, namespace='v')
+        actual = t.render('index', params, namespace='v')
         expected = expected_output()
         try:
             self.assertEqual(actual, expected)
@@ -150,24 +150,24 @@ class TemplateTestCase(unittest.TestCase):
             raise
 
         # do fail - try to use the variable out of scope
-        vars['do_fail'] = True
+        params['do_fail'] = True
         t = Template(html, root=template_root())
         self.failUnlessRaises(
             NameError,
-            t.render, 'index', vars, namespace='v'
+            t.render, 'index', params, namespace='v'
         )
 
     def test_assign_scope(self):
         """test assign directive's scope"""
 
-        _vars = dict(
+        params = dict(
             message='hello, from breve',
             title=my_name()
         )
 
         # don't fail - use variable in scope
         t = Template(html, root=template_root())
-        actual = t.render('index', vars, namespace='v')
+        actual = t.render('index', params, namespace='v')
         expected = expected_output()
         try:
             self.assertEqual(actual, expected)
@@ -178,12 +178,12 @@ class TemplateTestCase(unittest.TestCase):
     def test_include_macros(self):
         """define macros via include() directive"""
 
-        _vars = dict(
+        params = dict(
             message='hello, from breve',
             title=my_name()
         )
         t = Template(html, root=template_root())
-        actual = t.render('index', vars, namespace='v')
+        actual = t.render('index', params, namespace='v')
         expected = expected_output()
         try:
             self.assertEqual(actual, expected)
@@ -194,12 +194,12 @@ class TemplateTestCase(unittest.TestCase):
     def test_nested_include_macros(self):
         """define macros inside nested include() directives"""
 
-        _vars = dict(
+        params = dict(
             message='hello, from breve',
             title=my_name()
         )
         t = Template(html, root=template_root())
-        actual = t.render('index', vars, namespace='v')
+        actual = t.render('index', params, namespace='v')
         expected = expected_output()
         try:
             self.assertEqual(actual, expected)
@@ -210,7 +210,7 @@ class TemplateTestCase(unittest.TestCase):
     def test_loop_macros(self):
         """loop using macro"""
 
-        _vars = dict(
+        params = dict(
             message='hello, from breve',
             title=my_name(),
             url_data=[
@@ -220,7 +220,7 @@ class TemplateTestCase(unittest.TestCase):
             ]
         )
         t = Template(html, root=template_root())
-        actual = t.render('index', vars, namespace='v')
+        actual = t.render('index', params, namespace='v')
         expected = expected_output()
         try:
             self.assertEqual(actual, expected)
@@ -231,12 +231,12 @@ class TemplateTestCase(unittest.TestCase):
     def test_macro_includes(self):
         """include() directive inside macro"""
 
-        _vars = dict(
+        params = dict(
             message='hello, from breve',
             title=my_name()
         )
         t = Template(html, root=template_root())
-        actual = t.render('index', vars, namespace='v')
+        actual = t.render('index', params, namespace='v')
         expected = expected_output()
         try:
             self.assertEqual(actual, expected)
@@ -247,13 +247,13 @@ class TemplateTestCase(unittest.TestCase):
     def test_simple_inheritance(self):
         """simple inheritance"""
 
-        _vars = dict(
+        params = dict(
             message='hello, from breve',
             title=my_name()
         )
         _test_name = my_name()
         t = Template(html, root=template_root())
-        actual = t.render('index', vars, namespace='v')
+        actual = t.render('index', params, namespace='v')
         expected = expected_output()
         try:
             self.assertEqual(actual, expected)
@@ -264,12 +264,12 @@ class TemplateTestCase(unittest.TestCase):
     def test_nested_inheritance(self):
         """nested inheritance"""
 
-        _vars = dict(
+        params = dict(
             message='hello, from breve',
             title=my_name()
         )
         t = Template(html, root=template_root())
-        actual = t.render('index', vars, namespace='v')
+        actual = t.render('index', params, namespace='v')
         expected = expected_output()
         try:
             self.assertEqual(actual, expected)
@@ -283,12 +283,12 @@ class TemplateTestCase(unittest.TestCase):
         # note: I'm not convinced this is the desired behaviour, but
         # it's *compatible* behaviour.
 
-        _vars = dict(
+        params = dict(
             title=my_name(),
             message='Hello, from breve'
         )
         t = Template(html, root=template_root())
-        actual = t.render('index', vars, namespace='v')
+        actual = t.render('index', params, namespace='v')
         expected = expected_output()
         try:
             self.assertEqual(actual, expected)
@@ -299,14 +299,14 @@ class TemplateTestCase(unittest.TestCase):
     def test_register_global(self):
         """register_global() function"""
 
-        _vars = dict(
+        params = dict(
             title=my_name()
         )
         register_global('global_message', 'This is a global variable')
 
         _test_name = my_name()
         t = Template(html, root=template_root())
-        actual = t.render('index', vars, namespace='v')
+        actual = t.render('index', params, namespace='v')
         expected = expected_output()
         try:
             self.assertEqual(actual, expected)
@@ -325,12 +325,12 @@ class TemplateTestCase(unittest.TestCase):
     def test_stacks_template(self):
         """test stacks in template"""
 
-        _vars = dict(
+        params = dict(
             title=my_name(),
             message='hello, from breve'
         )
         t = Template(html, root=template_root())
-        actual = t.render('index', vars, namespace='v')
+        actual = t.render('index', params, namespace='v')
         expected = expected_output()
 
         try:
@@ -350,13 +350,13 @@ class TemplateTestCase(unittest.TestCase):
         register_flattener(datetime, flatten_date)
         register_global('flatten_date', flatten_date)
 
-        _vars = dict(
+        params = dict(
             title=my_name(),
             today=datetime(2008, 4, 17)
         )
         _test_name = my_name()
         t = Template(html, root=template_root())
-        actual = t.render('index', vars, namespace='v')
+        actual = t.render('index', params, namespace='v')
         expected = expected_output()
         try:
             self.assertEqual(actual, expected)
@@ -375,7 +375,7 @@ class TemplateTestCase(unittest.TestCase):
             ]
         register_global('render_row', render_row)
 
-        _vars = dict(
+        params = dict(
             title=my_name(),
             my_data=[
                 range(5),
@@ -384,7 +384,7 @@ class TemplateTestCase(unittest.TestCase):
             ]
         )
         t = Template(html, root=template_root())
-        actual = t.render('index', vars, namespace='v')
+        actual = t.render('index', params, namespace='v')
         expected = expected_output()
         try:
             self.assertEqual(actual, expected)
@@ -400,12 +400,12 @@ class TemplateTestCase(unittest.TestCase):
             return data
         register_global('render_text', render_text)
 
-        _vars = dict(
+        params = dict(
             title=my_name(),
             message='hello, world'
         )
         t = Template(html, root=template_root())
-        actual = t.render('index', vars, namespace='v')
+        actual = t.render('index', params, namespace='v')
         expected = expected_output()
         try:
             self.assertEqual(actual, expected)
@@ -441,13 +441,13 @@ class TemplateTestCase(unittest.TestCase):
             os.path.join(template_root(), 'path3'),
         )
 
-        _vars = dict(
+        params = dict(
             title=my_name(),
             message='hello, world'
         )
         _test_name = my_name()
         t = Template(html)  # note we're not setting root
-        actual = t.render('index', vars, namespace='v', loader=loader)
+        actual = t.render('index', params, namespace='v', loader=loader)
         expected = expected_output()
         try:
             self.assertEqual(actual, expected)
@@ -484,13 +484,13 @@ class TemplateTestCase(unittest.TestCase):
         )
         register_global('path_loader', loader)
 
-        _vars = dict(
+        params = dict(
             title=my_name(),
             message='hello, world'
         )
         _test_name = my_name()
         t = Template(html, root=template_root())
-        actual = t.render('index', vars, namespace='v')
+        actual = t.render('index', params, namespace='v')
         expected = expected_output()
         try:
             self.assertEqual(actual, expected)
@@ -501,14 +501,14 @@ class TemplateTestCase(unittest.TestCase):
     def test_encoding(self):
         """encoding comments"""
 
-        _vars = dict(
+        params = dict(
             title=my_name()
         )
         t = Template(html, root=template_root())
-        actual = t.render('wrong', vars, namespace='v')
+        actual = t.render('wrong', params, namespace='v')
         expected = expected_output()
         self.assertNotEqual(actual, expected)
-        actual = t.render('correct', vars, namespace='v')
+        actual = t.render('correct', params, namespace='v')
         try:
             self.assertEqual(actual, expected)
         except AssertionError:
@@ -524,7 +524,7 @@ class TemplateMemoryTestCase(unittest.TestCase):
         # is this even meaningful?
 
         import gc
-        _vars = dict(
+        params = dict(
             title=my_name(),
             message="memory test",
             biglist=['hello'] * 1000
@@ -532,9 +532,9 @@ class TemplateMemoryTestCase(unittest.TestCase):
         _collection_count = gc.get_count()
 
         t = Template(html, root=template_root())
-        _actual = t.render('index', vars, namespace='v')
+        _actual = t.render('index', params, namespace='v')
 
-        del vars
+        del params
         gc.collect()
         self.assertEqual(gc.get_count(), (0, 0, 0))
 

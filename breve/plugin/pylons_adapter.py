@@ -9,12 +9,12 @@ from breve import Template
 from breve.tags.html import tags
 
 
-def render(template_name, tmpl_vars=None, loader=None, fragment=False):
-    if tmpl_vars is None:
-        tmpl_vars = {}
+def render(template_name, tmpl_params=None, loader=None, fragment=False):
+    if tmpl_params is None:
+        tmpl_params = {}
 
     g = pylons_globals()
-    tmpl_vars.update(g)
+    tmpl_params.update(g)
 
     try:
         opts = g['app_globals'].breve_opts
@@ -22,4 +22,4 @@ def render(template_name, tmpl_vars=None, loader=None, fragment=False):
         opts = {}
 
     t = Template(tags, **opts)
-    return t.render(template_name, vars=tmpl_vars, loader=loader, fragment=fragment)
+    return t.render(template_name, params=tmpl_params, loader=loader, fragment=fragment)
