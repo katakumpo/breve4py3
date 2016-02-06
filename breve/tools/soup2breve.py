@@ -107,7 +107,7 @@ def convert(tag, output, indent=0, handlers=None):
         if hasattr(tag, 'name'):
             # is there are a handler for this tag?
             tag_handled = NOT_HANDLED
-            if handlers and handlers.has_key(tag.name):
+            if handlers and tag.name in handlers:
                 tag_handled = handlers[tag.name](tag, output, indent, handlers)
 
             # do we still need to handle the tag?
@@ -116,7 +116,7 @@ def convert(tag, output, indent=0, handlers=None):
                 if hasattr(tag, 'attrs') and tag.attrs:
                     output.append(' ( ')
                     i = 0
-                    for key, val in tag.attrs:
+                    for key, val in tag.attrs.items():
                         if i:
                             output.append(', ')
                         output.append('%s_="%s"' % (key, val))

@@ -168,7 +168,7 @@ class Template(object):
         _g = {}
         _g.update(T.tags)
         if T.namespace:
-            if not T.vars.has_key(T.namespace):
+            if not T.namespace in T.vars:
                 T.vars[T.namespace] = Namespace()
             if vars:
                 T.vars[T.namespace]._dict.update(vars)
