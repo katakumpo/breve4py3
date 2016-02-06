@@ -10,6 +10,10 @@ class Namespace(object):
         if values:
             self._dict.update(values)
 
+    def __contains__(self, k):
+        return k in self._dict
+
+
     def __getitem__(self, k):
         return self._dict[k]
 
