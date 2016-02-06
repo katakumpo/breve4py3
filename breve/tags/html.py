@@ -17,8 +17,8 @@ doctype = """<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
 class HtmlProto(str):
     __slots__ = []
 
-    def __call__(self, **kw):
-        return Tag(self)(**kw)
+    def __call__(self, *args, **kw):
+        return Tag(self)(*args, **kw)
 
     def __getitem__(self, children):
         return Tag(self)[children]

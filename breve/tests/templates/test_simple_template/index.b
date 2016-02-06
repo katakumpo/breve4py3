@@ -1,7 +1,7 @@
 html [
     head [
         title [ v.title ],
-        script ( type = 'text/javascript', src = '/js/phony.js' ),
+        script('src', '/js/phony.js', 'type', 'text/javascript'),
         inlineJS ( '''
             function foo ( ) {
                 alert ( 'hello, inlineJS!' );

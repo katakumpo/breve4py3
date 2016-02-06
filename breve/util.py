@@ -1,4 +1,6 @@
 # -*- coding: utf-8 -*-
+import collections
+import itertools
 import sys
 
 
@@ -109,3 +111,85 @@ class PrettyPrinter(object):
         p.CharacterDataHandler = self.char_data
         p.Parse(xmldata)
         return '\n'.join(self.output)
+
+
+
+def izip_flat_pairs(pairs, fillvalue=None):
+    it = iter(pairs)
+    return itertools.zip_longest(it, it, fillvalue=fillvalue)
+
+
+class odict(collections.OrderedDict):
+    def __init__(self, *args, **kwds):
+        """
+        Initialize an ordered dictionary. The signature is almost the same as regular dictionaries,
+        but keyword arguments are not recommended because their insertion order is arbitrary.
+
+        And additional:
+        * If an even number of args is given, they are used as flat key value pairs.
+        * Borrowed adict functionality for names without "__" in front
+
+        """
+        if len(args) > 1:
+            if len(args) % 2 != 0:
+                raise TypeError('expected one or an even number of args, got %d' % len(args))
+            args = izip_flat_pairs(args),
+        super().__init__(*args, **kwds)
+
+    def update(*args, **kwds):  # @NoSelf
+        ''' D.update([E, ]**F) -> None.  Update D from mapping/iterable E and F.
+            If E present and has a .keys() method, does:     for k in E: D[k] = E[k]
+            If E present and lacks .keys() method, does:     for (k, v) in E: D[k] = v
+            In either case, this is followed by: for k, v in F.items(): D[k] = v
+        '''
+        if not args:
+            raise TypeError("descriptor 'update' of 'MutableMapping' object "
+                            "needs an argument")
+        self, *args = args
+        if len(args) > 1:
+            if len(args) % 2 != 0:
+                raise TypeError('expected one or an even number of args, got %d' % len(args))
+            args = izip_flat_pairs(args),
+        if args:
+            other = args[0]
+            if isinstance(other, collections.Mapping):
+                for key in other:
+                    self[key] = other[key]
+            elif hasattr(other, "keys"):
+                for key in other.keys():
+                    self[key] = other[key]
+            else:
+                for key, value in other:
+                    self[key] = value
+        for key, value in kwds.items():
+            self[key] = value
+
+    def __getattr__(self, name):
+        if name.startswith('__'):
+            return super(odict, self).__getattr__(self, name)
+        try:
+            return self[name]
+        except KeyError:
+            raise self.__attr_error(name)
+
+    def __setattr__(self, name, value):
+        if name.startswith('_'):
+            super(odict, self).__setattr__(name, value)
+        else:
+            self[name] = value
+
+    def __delattr__(self, name):
+        if name.startswith('_'):
+            super(odict, self).__delattr__(name)
+
+        try:
+            del self[name]
+        except KeyError:
+            raise self.__attr_error(name)
+
+    def __attr_error(self, name):
+        return AttributeError("type object '{subclass_name}' has no attribute '{attr_name}'"
+                              .format(subclass_name=type(self).__name__, attr_name=name))
+
+    def copy(self):
+        return odict(dict.copy(self))

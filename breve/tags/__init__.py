@@ -5,6 +5,7 @@ from string import Template as sTemplate
 from breve.util import Namespace, escape, quoteattrs, caller
 from breve.flatten import flatten, register_flattener
 from . import _conditionals as C
+from ..util import odict
 
 conditionals = dict([
     (k, v) for k, v in C.__dict__.items()
@@ -61,19 +62,18 @@ class Tag(object):
     def __init__(self, name, *args, **kw):
         self.name = name
         self.children = []
-        self.attrs = kw
+        self.attrs = odict(kw)
         self.render = None
         self.data = None
-        self.args = args
 
-    def __call__(self, render=None, data=None, *args, **kw):
-        self.render = render or self.render
-        self.data = data or self.data
+    def __call__(self, *args, **kw):
+        self.render = kw.pop('render', self.render)
+        self.data = kw.pop('data', self.data)
         self.attrs.update(
             dict([(k.strip(u'_'), v)
                   for k, v in kw.items()])
         )
-        self.args = args or self.args
+        self.attrs.update(*args)
         return self
 
     def __getitem__(self, k):
@@ -91,7 +91,7 @@ class Tag(object):
         return self
 
     def __copy__(self):
-        t = Tag(self.name, *self.args)
+        t = Tag(self.name)
         t.attrs = deepcopy(self.attrs)
         t.data = self.data
         t.render = self.render
@@ -101,7 +101,7 @@ class Tag(object):
     def __mul__(self, alist):
         def traverse(o, data):
             children = []
-            for k, v in o.attrs.items():
+            for k, v in sorted(o.attrs.items()):
                 o.attrs[k] = sTemplate(v).safe_substitute(data)
             for c in o.children:
                 if isinstance(c, Tag):
@@ -140,8 +140,8 @@ class Tag(object):
 class Proto(str):
     Class = Tag
 
-    def __call__(self, **kw):
-        return self.Class(self)(**kw)
+    def __call__(self, *args, **kw):
+        return self.Class(self)(*args, **kw)
 
     def __getitem__(self, children):
         return self.Class(self)[children]

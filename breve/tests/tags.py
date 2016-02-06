@@ -422,8 +422,8 @@ class DOMTestCase(unittest.TestCase):
             T.html[
                 T.head[T.title['macro madness']],
                 T.body[extract_css(# @UndefinedVariable
-                    T.div(class_='text', id='main-content')[
-                        T.img(src='/images/breve-logo.png', alt='breve logo'),
+                    T.div('class', 'text', 'id', 'main-content')[
+                        T.img('src', '/images/breve-logo.png', 'alt', 'breve logo'),
                         T.br,
                         T.span (class_='bold') [ """Hello from Breve!""" ]
                     ]
