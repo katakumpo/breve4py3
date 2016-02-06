@@ -517,29 +517,6 @@ class TemplateTestCase(unittest.TestCase):
         # self.assertNotEqual(actual, expected)
 
 
-class TemplateMemoryTestCase(unittest.TestCase):
-
-    def test_let_memory_freed(self):
-        """test that let() objects are freed"""
-
-        # is this even meaningful?
-
-        import gc
-        params = dict(
-            title=my_name(),
-            message="memory test",
-            biglist=['hello'] * 1000
-        )
-        _collection_count = gc.get_count()
-
-        t = Template(html, root=template_root())
-        _actual = t.render('index', params, namespace='v')
-
-        del params
-        gc.collect()
-        self.assertEqual(gc.get_count(), (0, 0, 0))
-
-
 def suite():
     suite = unittest.TestSuite()
     suite.addTest(unittest.makeSuite(TemplateTestCase, 'test'))
