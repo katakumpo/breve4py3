@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from breve.flatten import register_flattener
 from breve.util import Namespace
 

@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 """
 Simple adapter for Pylons 0.9.7 and greater.  
 Earlier versions of Pylons should use the Buffet adapter.

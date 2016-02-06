@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 class switch(object):
 
     def __init__(self, value):

@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 # sitemap.py - example custom tag definition file
 
 from breve.tags import Proto

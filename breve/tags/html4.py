@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from breve.util import quoteattrs
 from breve.flatten import register_flattener
 from breve.tags import EmptyTag, Namespace

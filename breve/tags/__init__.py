@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from copy import copy, deepcopy
 from string import Template as sTemplate
 

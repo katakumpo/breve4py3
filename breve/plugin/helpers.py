@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from breve import Template
 from breve.tags.html import tags
 

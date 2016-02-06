@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 """
 soup2breve - Robert Leftwich
 

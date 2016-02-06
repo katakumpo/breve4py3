@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 #!/usr/bin/python
 
 # This code is original from jsmin by Douglas Crockford, it was translated to

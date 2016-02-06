@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from breve.flatten import flatten, register_flattener
 from breve.tags import Proto, Tag, Namespace, cdata, xml, flatten_tag, flatten_proto, custom_tag
 from breve.tags.jsmin import jsmin
