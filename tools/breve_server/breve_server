@@ -10,13 +10,12 @@ from optparse import OptionParser
 from wsgiref.simple_server import make_server
 import cgitb
 cgitb.enable()
-from urlparse import urlparse
+from urllib.parse import urlparse
 from mimetypes import guess_type
 import os
-import sys
 import logging
 
-from breve import Template, Namespace
+from breve import Template
 from breve.tags import html
 from breve.loaders import FileLoader
 
@@ -25,7 +24,7 @@ logger = logging.getLogger(__name__)
 
 def reconstruct_url(environ):
     # From WSGI spec, PEP 333
-    from urllib import quote
+    from urllib.parse import quote
     url = environ['wsgi.url_scheme'] + '://'
     if environ.get('HTTP_HOST'):
         url += environ['HTTP_HOST']
@@ -154,11 +153,10 @@ class BreveApp(object):
         except OSError:
             return self.fileserver(environ, start_response)
 
-        vars = {}
         if self.options.variables:
             pythonpath, modname = os.path.split(self.options.variables)
             sys.path.insert(0, pythonpath)
-            mod, ext = os.path.splitext(modname)
+            mod, _ = os.path.splitext(modname)
             module = __import__(mod, fromlist='*')
             for k in dir(module):
                 if not k.startswith('__'):

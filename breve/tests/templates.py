@@ -2,17 +2,15 @@
 
 import os
 import sys
-import doctest
 import unittest
 from datetime import datetime
 
 if __name__ == '__main__':
     # force import from source directory rather than site-packages
     sys.path.insert(0, os.path.abspath('../..'))
-    import breve
+    import breve  # @UnusedImport
 
 from breve.tags.html import tags as html
-from breve.flatten import flatten
 from breve import Template, register_flattener, register_global, escape
 from breve.globals import push, pop, get_stacks
 from breve.tests.lib import diff, template_root, my_name, expected_output
@@ -37,7 +35,7 @@ class TemplateTestCase(unittest.TestCase):
     def test_render_parameters(self):
         """test render-time parameters"""
 
-        vars = dict(
+        _vars = dict(
             message='hello, from breve',
             title=my_name()
         )
@@ -55,7 +53,7 @@ class TemplateTestCase(unittest.TestCase):
     def test_simple_template(self):
         """simple template"""
 
-        vars = dict(
+        _vars = dict(
             message='hello, from breve',
             title=my_name()
         )
@@ -71,7 +69,7 @@ class TemplateTestCase(unittest.TestCase):
     def test_include(self):
         """include() directive"""
 
-        vars = dict(
+        _vars = dict(
             message='hello, from breve',
             title=my_name()
         )
@@ -87,7 +85,7 @@ class TemplateTestCase(unittest.TestCase):
     def test_nested_include(self):
         """nested include() directives"""
 
-        vars = dict(
+        _vars = dict(
             message='hello, from breve',
             title=my_name()
         )
@@ -103,7 +101,7 @@ class TemplateTestCase(unittest.TestCase):
     def test_loop_include(self):
         """looping over include() with listcomp"""
 
-        vars = dict(
+        _vars = dict(
             message='hello, from breve',
             title=my_name()
         )
@@ -119,7 +117,7 @@ class TemplateTestCase(unittest.TestCase):
     def test_let_directive(self):
         """test let directive"""
 
-        vars = dict(
+        _vars = dict(
             message='hello, from breve',
             title=my_name()
         )
@@ -135,7 +133,7 @@ class TemplateTestCase(unittest.TestCase):
     def test_let_directive_scope(self):
         """test let directive's scope"""
 
-        vars = dict(
+        _vars = dict(
             message='hello, from breve',
             title=my_name(),
             do_fail=False
@@ -162,7 +160,7 @@ class TemplateTestCase(unittest.TestCase):
     def test_assign_scope(self):
         """test assign directive's scope"""
 
-        vars = dict(
+        _vars = dict(
             message='hello, from breve',
             title=my_name()
         )
@@ -180,7 +178,7 @@ class TemplateTestCase(unittest.TestCase):
     def test_include_macros(self):
         """define macros via include() directive"""
 
-        vars = dict(
+        _vars = dict(
             message='hello, from breve',
             title=my_name()
         )
@@ -196,7 +194,7 @@ class TemplateTestCase(unittest.TestCase):
     def test_nested_include_macros(self):
         """define macros inside nested include() directives"""
 
-        vars = dict(
+        _vars = dict(
             message='hello, from breve',
             title=my_name()
         )
@@ -212,7 +210,7 @@ class TemplateTestCase(unittest.TestCase):
     def test_loop_macros(self):
         """loop using macro"""
 
-        vars = dict(
+        _vars = dict(
             message='hello, from breve',
             title=my_name(),
             url_data=[
@@ -233,7 +231,7 @@ class TemplateTestCase(unittest.TestCase):
     def test_macro_includes(self):
         """include() directive inside macro"""
 
-        vars = dict(
+        _vars = dict(
             message='hello, from breve',
             title=my_name()
         )
@@ -249,11 +247,11 @@ class TemplateTestCase(unittest.TestCase):
     def test_simple_inheritance(self):
         """simple inheritance"""
 
-        vars = dict(
+        _vars = dict(
             message='hello, from breve',
             title=my_name()
         )
-        test_name = my_name()
+        _test_name = my_name()
         t = Template(html, root=template_root())
         actual = t.render('index', vars, namespace='v')
         expected = expected_output()
@@ -266,7 +264,7 @@ class TemplateTestCase(unittest.TestCase):
     def test_nested_inheritance(self):
         """nested inheritance"""
 
-        vars = dict(
+        _vars = dict(
             message='hello, from breve',
             title=my_name()
         )
@@ -285,7 +283,7 @@ class TemplateTestCase(unittest.TestCase):
         # note: I'm not convinced this is the desired behaviour, but
         # it's *compatible* behaviour.
 
-        vars = dict(
+        _vars = dict(
             title=my_name(),
             message='Hello, from breve'
         )
@@ -301,12 +299,12 @@ class TemplateTestCase(unittest.TestCase):
     def test_register_global(self):
         """register_global() function"""
 
-        vars = dict(
+        _vars = dict(
             title=my_name()
         )
         register_global('global_message', 'This is a global variable')
 
-        test_name = my_name()
+        _test_name = my_name()
         t = Template(html, root=template_root())
         actual = t.render('index', vars, namespace='v')
         expected = expected_output()
@@ -327,7 +325,7 @@ class TemplateTestCase(unittest.TestCase):
     def test_stacks_template(self):
         """test stacks in template"""
 
-        vars = dict(
+        _vars = dict(
             title=my_name(),
             message='hello, from breve'
         )
@@ -352,11 +350,11 @@ class TemplateTestCase(unittest.TestCase):
         register_flattener(datetime, flatten_date)
         register_global('flatten_date', flatten_date)
 
-        vars = dict(
+        _vars = dict(
             title=my_name(),
             today=datetime(2008, 4, 17)
         )
-        test_name = my_name()
+        _test_name = my_name()
         t = Template(html, root=template_root())
         actual = t.render('index', vars, namespace='v')
         expected = expected_output()
@@ -377,7 +375,7 @@ class TemplateTestCase(unittest.TestCase):
             ]
         register_global('render_row', render_row)
 
-        vars = dict(
+        _vars = dict(
             title=my_name(),
             my_data=[
                 range(5),
@@ -402,7 +400,7 @@ class TemplateTestCase(unittest.TestCase):
             return data
         register_global('render_text', render_text)
 
-        vars = dict(
+        _vars = dict(
             title=my_name(),
             message='hello, world'
         )
@@ -428,10 +426,10 @@ class TemplateTestCase(unittest.TestCase):
                 for p in self.paths:
                     f = os.path.join(root, p, template)
                     if os.path.isfile(f):
-                        timestamp = long(os.stat(f).st_mtime)
+                        timestamp = int(os.stat(f).st_mtime)
                         uid = f
                         return uid, timestamp
-                raise OSError, 'No such file or directory %s' % template
+                raise OSError('No such file or directory %s' % template)
 
             def load(self, uid):
                 return open(uid, 'U').read()
@@ -443,11 +441,11 @@ class TemplateTestCase(unittest.TestCase):
             os.path.join(template_root(), 'path3'),
         )
 
-        vars = dict(
+        _vars = dict(
             title=my_name(),
             message='hello, world'
         )
-        test_name = my_name()
+        _test_name = my_name()
         t = Template(html)  # note we're not setting root
         actual = t.render('index', vars, namespace='v', loader=loader)
         expected = expected_output()
@@ -470,10 +468,10 @@ class TemplateTestCase(unittest.TestCase):
                 for p in self.paths:
                     f = os.path.join(root, p, template)
                     if os.path.isfile(f):
-                        timestamp = long(os.stat(f).st_mtime)
+                        timestamp = int(os.stat(f).st_mtime)
                         uid = f
                         return uid, timestamp
-                raise OSError, 'No such file or directory %s' % template
+                raise OSError('No such file or directory %s' % template)
 
             def load(self, uid):
                 return open(uid, 'U').read()
@@ -486,11 +484,11 @@ class TemplateTestCase(unittest.TestCase):
         )
         register_global('path_loader', loader)
 
-        vars = dict(
+        _vars = dict(
             title=my_name(),
             message='hello, world'
         )
-        test_name = my_name()
+        _test_name = my_name()
         t = Template(html, root=template_root())
         actual = t.render('index', vars, namespace='v')
         expected = expected_output()
@@ -503,7 +501,7 @@ class TemplateTestCase(unittest.TestCase):
     def test_encoding(self):
         """encoding comments"""
 
-        vars = dict(
+        _vars = dict(
             title=my_name()
         )
         t = Template(html, root=template_root())
@@ -526,15 +524,15 @@ class TemplateMemoryTestCase(unittest.TestCase):
         # is this even meaningful?
 
         import gc
-        vars = dict(
+        _vars = dict(
             title=my_name(),
             message="memory test",
             biglist=['hello'] * 1000
         )
-        collection_count = gc.get_count()
+        _collection_count = gc.get_count()
 
         t = Template(html, root=template_root())
-        actual = t.render('index', vars, namespace='v')
+        _actual = t.render('index', vars, namespace='v')
 
         del vars
         gc.collect()

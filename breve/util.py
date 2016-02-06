@@ -41,8 +41,8 @@ def quoteattrs(attrs):
     for a, v in attrs.items():
         if v is None:
             continue
-        if not isinstance(v, unicode):
-            v = unicode(v, 'utf-8')
+        if not isinstance(v, str):
+            v = str(v, 'utf-8')
 
         v = u'"' + v.replace(u"&", u"&amp;"
                              ).replace(u">", u"&gt;"
@@ -97,7 +97,7 @@ class PrettyPrinter(object):
         self.output.append(padding + data)
 
     def parse(self, xmldata):
-        from xml.parsers.expat import ParserCreate
+        from xml.parsers.expat import ParserCreate  # @UnresolvedImport
 
         p = ParserCreate('utf-8')
         p.StartElementHandler = self.start_element

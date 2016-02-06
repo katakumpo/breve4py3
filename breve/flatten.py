@@ -29,4 +29,4 @@ def flatten(o):
     try:
         return __registry[type(o)](o)
     except KeyError:
-        return unicode(o)
+        return str(o)

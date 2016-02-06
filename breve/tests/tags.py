@@ -2,13 +2,12 @@
 
 import sys
 import os
-import doctest
 import unittest
 
 if __name__ == '__main__':
     # force import from source directory rather than site-packages
     sys.path.insert(0, os.path.abspath('../..'))
-    import breve
+    import breve  # @UnusedImport
 
 from breve.tags import Tag, AutoTag
 from breve.tags.html import tags
@@ -232,7 +231,7 @@ class MacrosTestCase(unittest.TestCase):
                 T.head[T.title[my_name()]],
                 T.body[
                     T.ul[
-                        [T.li[test_macro(**_item)]
+                        [T.li[test_macro(**_item)]  # @UndefinedVariable
                          for _item in url_data]
                     ]
                 ]
@@ -262,13 +261,13 @@ class MacrosTestCase(unittest.TestCase):
                 macro('link_macro', lambda _u, _l:
                       T.a(href=_u)[_l]
                       ),
-                T.li[link_macro(url, label)]
+                T.li[link_macro(url, label)]  # @UndefinedVariable
             )),
             T.html[
                 T.head[T.title[my_name()]],
                 T.body[
                     T.ul[
-                        [list_macro(**_item)
+                        [list_macro(**_item)  # @UndefinedVariable
                          for _item in url_data]
                     ]
                 ]
@@ -301,7 +300,7 @@ class MacrosTestCase(unittest.TestCase):
                 T.head[T.title[my_name()]],
                 T.body[
                     T.ul[
-                        T.li(class_="$class")[test_macro("$url")] * url_data
+                        T.li(class_="$class")[test_macro("$url")] * url_data  # @UndefinedVariable
                     ]
                 ]
             ]
@@ -323,7 +322,7 @@ class MacrosTestCase(unittest.TestCase):
             let(msg='okay'),
             T.html[
                 T.head[T.title[my_name()]],
-                T.body[T.div[msg]]
+                T.body[T.div[msg]]  # @UndefinedVariable
             ]
         )
         output = flatten(template)
@@ -340,7 +339,7 @@ class MacrosTestCase(unittest.TestCase):
             assign('msg', 'okay'),
             T.html[
                 T.head[T.title[my_name()]],
-                T.body[T.div[msg]]
+                T.body[T.div[msg]]  # @UndefinedVariable
             ]
         )
         output = flatten(template)
@@ -360,7 +359,7 @@ class MacrosTestCase(unittest.TestCase):
                   ),
             T.html[
                 T.head[T.title[my_name()]],
-                T.body[T.div[display_msg(msg)]]
+                T.body[T.div[display_msg(msg)]]  # @UndefinedVariable
             ]
         )
         output = flatten(template)
@@ -407,14 +406,14 @@ class DOMTestCase(unittest.TestCase):
                   attr == 'class' and '.' or '#'
                   ),
             macro('get_selectors', lambda tag, is_tag:
-                  selectors.extend([
-                      "%s%s%s { }" % (tag.name, css_sep(_k.strip('_')), _v)
+                  selectors.extend([  # @UndefinedVariable
+                      "%s%s%s { }" % (tag.name, css_sep(_k.strip('_')), _v)  # @UndefinedVariable
                       for _k, _v in tag.attrs.items()
                       if _k.strip('_') in ('id', 'class')
                   ])
                   ),
             macro('extract_css', lambda tag:
-                  tag.walk(get_selectors, True) and tag
+                  tag.walk(get_selectors, True) and tag  # @UndefinedVariable
                   ),
             macro('css_results', lambda selectors:
                   T.pre['\n'.join(selectors)]
@@ -422,13 +421,13 @@ class DOMTestCase(unittest.TestCase):
 
             T.html[
                 T.head[T.title['macro madness']],
-                T.body[extract_css(
+                T.body[extract_css(# @UndefinedVariable
                     T.div(class_='text', id='main-content')[
                         T.img(src='/images/breve-logo.png', alt='breve logo'),
                         T.br,
                         T.span (class_='bold') [ """Hello from Breve!""" ]
                     ]
-                ), css_results(selectors)]
+                ), css_results(selectors)]  # @UndefinedVariable
             ]
 
         )
@@ -450,7 +449,7 @@ class CustomTagsTestCase(unittest.TestCase):
     def test_custom_tags(self):
         """custom tags"""
 
-        from breve.tests.sitemap import tags, xmlns
+        from breve.tests.sitemap import tags, xmlns  # @Reimport
         T = Namespace(tags)
 
         # test data
@@ -481,7 +480,7 @@ class CustomTagsTestCase(unittest.TestCase):
 
         template = (
             assign('mytag', Tag('mytag')),
-            mytag(feature='foo')[
+            mytag(feature='foo')[  # @UndefinedVariable
                 'hello, from mytag',
                 Tag('explicit')(feature='bar')[
                     'hello from explicit tag'

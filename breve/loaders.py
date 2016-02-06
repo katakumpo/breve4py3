@@ -6,7 +6,7 @@ class FileLoader(object):
     __slots__ = []
 
     def stat(self, template, root):
-        timestamp = long(os.stat(os.path.join(root, template)).st_mtime)
+        timestamp = int(os.stat(os.path.join(root, template)).st_mtime)
         uid = os.path.join(root, template)
         return uid, timestamp
 

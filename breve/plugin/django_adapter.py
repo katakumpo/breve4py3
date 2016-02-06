@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-import os
 from breve import Template
 from breve.tags import html
 from django.http import HttpResponse
@@ -16,7 +15,7 @@ except AttributeError:
 
 
 def flatten_string(obj):
-    return unicode(obj).encode(settings.DEFAULT_CHARSET)
+    return str(obj).encode(settings.DEFAULT_CHARSET)
 
 
 class _loader(object):
@@ -50,15 +49,15 @@ class TemplateAdapter(object):
         self.names = names
         self.breve_opts = breve_opts
 
-    def render(self, vars=None):
+    def render(self, vars=None):  # @ReservedAssignment
         import os
         if vars == None:
-            vars = {}
+            vars = {}  # @ReservedAssignment
         elif isinstance(vars, Context):
             result = {}
             for d in [d for d in vars].__reversed__():
                 result.update(d)
-            vars = result
+            vars = result  # @ReservedAssignment
         for name in self.names:
             try:
                 return flatten_string(
@@ -83,11 +82,11 @@ class TemplateAdapter(object):
 loader = _loader(root=BREVE_ROOT, breve_opts=BREVE_OPTS)
 
 
-def render_to_response(template, vars=None, **kwargs):
+def render_to_response(template, vars=None, **kwargs):  # @ReservedAssignment
     t = loader.get_template(template)
     return HttpResponse(t.render(vars), **kwargs)
 
 
-def render_to_string(template, vars=None):
+def render_to_string(template, vars=None):  # @ReservedAssignment
     t = loader.get_template(template)
     return flatten_string(t.render(vars))

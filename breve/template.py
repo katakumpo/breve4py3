@@ -1,16 +1,12 @@
 # -*- coding: utf-8 -*-
 #! /usr/bin/python
-
-import os
+import pydoc
 import sys
-import types
-import pprint
-import cgitb
 
-from breve.util import Namespace, caller, PrettyPrinter
-from breve.tags import Proto, Tag, xml, invisible, cdata, comment, conditionals, test, macro, assign, let, AutoTag
+from breve.util import Namespace, caller
+from breve.tags import Tag, xml, invisible, cdata, comment, conditionals, test, macro, assign, let, AutoTag
 from breve.tags.entities import entities
-from breve.flatten import flatten, register_flattener, registry
+from breve.flatten import flatten
 from breve.loaders import FileLoader
 from breve.cache import Cache
 from breve.globals import get_globals, push, pop
@@ -34,11 +30,11 @@ class Template(object):
     autotags = None
     loaders = [_loader]
 
-    def _update_params(T, **kw):
+    def _update_params(T, **kw):  # @NoSelf
         for _a in ('tidy', 'debug', 'namespace', 'mashup_entities', 'extension', 'autotags', 'cgitb'):
             setattr(T, _a, kw.get(_a, getattr(T, _a)))
 
-    def __init__(T, tags, root='.', xmlns=None, doctype=None, **kw):
+    def __init__(T, tags, root='.', xmlns=None, doctype=None, **kw):  # @NoSelf
         """
         Uses "T" rather than "self" to avoid confusion with
         subclasses that refer to this class via scoping (see
@@ -106,25 +102,25 @@ class Template(object):
         if T.autotags:
             T.tags[T.autotags] = AutoTag()
 
-    def include(T, template, vars=None, loader=None):
+    def include(T, template, vars=None, loader=None):  # @NoSelf @ReservedAssignment
         """
         evalutes template fragment(s) in the current (caller's) context
         """
-        if type(template) is types.StringType:
+        if isinstance(template, str):
             template = [template]
 
         results = []
         for tpl in template:
-            locals = {}
+            locals_ = {}
             if vars:
-                locals.update(vars)
+                locals_.update(vars)
             frame = caller()
             filename = "%s.%s" % (tpl, T.extension)
             if loader:
                 T.loaders.append(loader)
             try:
                 code = _cache.compile(filename, T.root, T.loaders[-1])
-                result = eval(code, frame.f_globals, locals)
+                result = eval(code, frame.f_globals, locals_)
             finally:
                 if loader:
                     T.loaders.pop()
@@ -150,9 +146,8 @@ class Template(object):
     #             T.loaders.pop ( )
     #     return result
 
-    def _evaluate(T, template, fragments=None, vars=None, loader=None, **kw):
+    def _evaluate(T, template, fragments=None, vars=None, loader=None, **kw):  # @NoSelf @ReservedAssignment
         filename = "%s.%s" % (template, T.extension)
-        output = u''
 
         T._update_params(**kw)
 
@@ -192,7 +187,7 @@ class Template(object):
 
         return result
 
-    def render_partial(T, template, fragments=None, vars=None, loader=None, **kw):
+    def render_partial(T, template, fragments=None, vars=None, loader=None, **kw):  # @NoSelf @ReservedAssignment
         try:
             result = T._evaluate(template, fragments, vars, loader, **kw)
             output = flatten(result)
@@ -211,13 +206,13 @@ class Template(object):
                            indent='auto',
                            tidy_mark=False,
                            input_encoding='utf8')
-            return unicode(tidylib.parseString(output.encode('utf-8'), **options))
+            return str(tidylib.parseString(output.encode('utf-8'), **options))
         else:
             # p = PrettyPrinter ( )
             # return p.parse ( output )
             return output
 
-    def render(T, template, vars=None, loader=None, fragment=False, **kw):
+    def render(T, template, vars=None, loader=None, fragment=False, **kw):  # @NoSelf @ReservedAssignment
         if loader:
             T.loaders.append(loader)
         output = T.render_partial(template, vars=vars, **kw)
@@ -227,7 +222,7 @@ class Template(object):
             return output
         return u'\n'.join([T.xml_encoding or u'', T.doctype or u'', output])
 
-    def debug_out(T, exc_info, filename):
+    def debug_out(self, exc_info, filename):
         import cgitb
         cgitb.enable()
         raise
@@ -241,7 +236,7 @@ class Template(object):
              pydoc.html.escape(str(etype)),
              pydoc.html.escape(str(evalue)))
         ]
-        if type(evalue) is types.InstanceType:
+        if isinstance(evalue, object):
             for name in dir(evalue):
                 if name[:1] == '_' or name == 'args':
                     continue

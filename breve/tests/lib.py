@@ -2,7 +2,6 @@
 import sys
 import os
 import difflib
-from pprint import pprint
 
 
 def diff(actual, expected):

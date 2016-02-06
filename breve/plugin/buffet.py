@@ -2,7 +2,7 @@
 import os
 from breve import Template
 from breve.tags import html
-from urllib import splitquery
+from urllib.parse import splitquery
 
 
 class BreveTemplatePlugin(object):
@@ -18,7 +18,7 @@ class BreveTemplatePlugin(object):
         self.options = options or {}
         self.breve_opts = {}
 
-    def get_config(self, vars):
+    def get_config(self, vars):  # @ReservedAssignment
         """
         Different frameworks provide needed config info at different times
         and in different ways (notably TurboGears and Pylons), so I've wrapped
@@ -74,7 +74,7 @@ class BreveTemplatePlugin(object):
             template_path = os.path.join(*parts)
         return template_path, template_filename, args
 
-    def render(self, info, format="html", fragment=False, template=None):
+    def render(self, info, format="html", fragment=False, template=None):  # @ReservedAssignment
         """
         info == dict of variables to stick into the template namespace
         format == output format if applicable
@@ -82,7 +82,7 @@ class BreveTemplatePlugin(object):
         template == dotted.path.to.template (without .ext)
         """
 
-        vars = info
+        vars = info  # @ReservedAssignment
 
         # check to see if we were passed a function get extra vars
         if callable(self.get_extra_vars):
@@ -93,7 +93,7 @@ class BreveTemplatePlugin(object):
         # self.breve_opts.update ( args )
 
         template_root = self.breve_opts['root']
-        format = args.get('format', format)
+        format = args.get('format', format)  # @ReservedAssignment
 
         if template_root and template_path.startswith(template_root):
             # this feels mildly brittle

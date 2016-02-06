@@ -7,9 +7,9 @@ Requires BeautifulSoup - http://www.crummy.com/software/BeautifulSoup/
 
 import sys
 import codecs
-import htmlentitydefs
+import html
 
-from BeautifulSoup import BeautifulSoup, Tag, NavigableString, Comment
+from bs4 import BeautifulSoup, NavigableString, Comment
 
 DEFAULT_ENCODING = 'utf-8'
 INDENT = '   '
@@ -22,7 +22,7 @@ CONTENT_HANDLED = 2  # handler handled everything
 
 # a dictionary to translate unicode into HTML entities
 codepoint2entity = dict([(c, u'%s[E.%s]%s' % (GUARD, n, GUARD))
-                         for c, n in htmlentitydefs.codepoint2name.iteritems()])
+                         for c, n in html.entities.codepoint2name.items()])
 
 # our own version of the beautiful soup parser
 

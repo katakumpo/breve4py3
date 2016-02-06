@@ -31,17 +31,17 @@
 # SOFTWARE.
 # */
 
-from StringIO import StringIO
+from io import StringIO
 
 
 def jsmin(js):
     ins = StringIO(js)
     outs = StringIO()
     JavascriptMinify().minify(ins, outs)
-    str = outs.getvalue()
-    if len(str) > 0 and str[0] == '\n':
-        str = str[1:]
-    return str
+    txt = outs.getvalue()
+    if len(txt) > 0 and txt[0] == '\n':
+        txt = txt[1:]
+    return txt
 
 
 def isAlphanum(c):

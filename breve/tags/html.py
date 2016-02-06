@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
-from breve.flatten import flatten, register_flattener
-from breve.tags import Proto, Tag, Namespace, cdata, xml, flatten_tag, flatten_proto, custom_tag
+from breve.flatten import register_flattener
+from breve.tags import Proto, Tag, Namespace, flatten_tag, custom_tag
 from breve.tags.jsmin import jsmin
 
 xmlns = "http://www.w3.org/1999/xhtml"
@@ -14,7 +14,7 @@ doctype = """<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
 #
 
 
-class HtmlProto(unicode):
+class HtmlProto(str):
     __slots__ = []
 
     def __call__(self, **kw):
@@ -68,7 +68,7 @@ empty_tag_names = [
 ]
 
 
-class inlineJS(unicode):
+class inlineJS(str):
 
     def __init__(self, children):
         self.children = children
@@ -79,7 +79,7 @@ def flatten_inlineJS(o):
 register_flattener(inlineJS, flatten_inlineJS)
 
 
-class minJS(unicode):
+class minJS(str):
 
     def __init__(self, children):
         self.children = jsmin(children)

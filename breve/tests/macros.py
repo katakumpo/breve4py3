@@ -2,19 +2,16 @@
 
 import sys
 import os
-import doctest
 import unittest
 
 if __name__ == '__main__':
     # force import from source directory rather than site-packages
     sys.path.insert(0, os.path.abspath('../..'))
-    import breve
+    import breve  # @UnusedImport
 
 from breve.tags.html import tags as T
-from breve.tags.entities import entities as E
-from breve.tags import macro, assign, xml, test, let
+from breve.tags import macro, assign
 from breve.flatten import flatten
-from breve.util import Namespace
 from breve.tests.lib import my_name
 
 
@@ -39,8 +36,8 @@ class MacrosTestCase(unittest.TestCase):
                             T.thead[[T.th[_col] for _col in data[0]]]
                         ),
                         T.tbody[
-                            [T.tr(class_='row-%s' % alts[_rx % 2])[
-                                [T.td(class_='col-%s' % alts[_cx % 2])[_col]
+                            [T.tr(class_='row-%s' % alts[_rx % 2])[  # @UndefinedVariable
+                                [T.td(class_='col-%s' % alts[_cx % 2])[_col]  # @UndefinedVariable
                                  for _cx, _col in enumerate(_row)]
                             ] for _rx, _row in enumerate(data[int(header):])]
                         ]
@@ -51,7 +48,7 @@ class MacrosTestCase(unittest.TestCase):
             T.html[
                 T.head[T.title[my_name()]],
                 T.body[
-                    AutoTable(data, header=True)
+                    AutoTable(data, header=True)  # @UndefinedVariable
                 ]
             ]
         )
@@ -84,7 +81,7 @@ class MacrosTestCase(unittest.TestCase):
                   ),
             T.html[
                 T.head[T.title[my_name()]],
-                T.body[AutoList(data)]
+                T.body[AutoList(data)]  # @UndefinedVariable
             ]
         )
         output = flatten(template)
@@ -96,7 +93,7 @@ class MacrosTestCase(unittest.TestCase):
              u'<li>Item 7</li><li>Item 8</li></ul></body></html>')
         )
 
-    def test_autolist_macro(self):
+    def test_autolist_macro(self):  # @DuplicatedSignature
         """test autolist macro"""
 
         sublist1 = ["List 1:%s" % _i for _i in range(3)]
@@ -115,7 +112,7 @@ class MacrosTestCase(unittest.TestCase):
                   data and (
                       T.ul(class_='autolist level-%s' % level)[
                           [T.li[
-                              [lambda _i, _j: _i, AutoList]
+                              [lambda _i, _j: _i, AutoList]  # @UndefinedVariable
                               [isinstance(_i, list)](_i, level + 1)
                           ]
                               for _i in data]
@@ -125,7 +122,7 @@ class MacrosTestCase(unittest.TestCase):
 
             T.html[
                 T.head[T.title[my_name()]],
-                T.body[AutoList(data)]
+                T.body[AutoList(data)]  # @UndefinedVariable
             ]
         )
         output = flatten(template)
@@ -150,12 +147,12 @@ class MacrosTestCase(unittest.TestCase):
             macro('TableOfContents', lambda matchtags, tag: (
                 macro('toc_search', lambda tag, is_tag:
                       tag.name in matchtags and (
-                          TOC.append(T.a(href='#toc-%s' % tag.children[0])[tag.children[0]]),
+                          TOC.append(T.a(href='#toc-%s' % tag.children[0])[tag.children[0]]),  # @UndefinedVariable
                           tag.attrs.update({'class': 'chapter-%s' % tag.name}),
                           tag.children.insert(0, T.a(name='toc-%s' % tag.children[0])[tag.name])
                       ) or True
                       ),
-                tag.walk(toc_search, True)
+                tag.walk(toc_search, True)  # @UndefinedVariable
             )),
 
             T.html[
@@ -163,9 +160,9 @@ class MacrosTestCase(unittest.TestCase):
                 T.body[
                     T.div(id='TableOfContents')[
                         'Table of Contents',
-                        lambda: T.ul[[T.li[_t] for _t in TOC]]
+                        lambda: T.ul[[T.li[_t] for _t in TOC]]  # @UndefinedVariable
                     ],
-                    TableOfContents(('h1', 'h2', 'h3'), T.div[
+                    TableOfContents(('h1', 'h2', 'h3'), T.div[  # @UndefinedVariable
                         T.h1['Chapter 1'],
                         T.div['chapter 1 content'],
                         T.h1['Chapter 2'],
@@ -181,7 +178,7 @@ class MacrosTestCase(unittest.TestCase):
             ]
         )
 
-        actual = flatten(template)
+        actual = flatten(template)  # @UnusedVariable
         # print(actual)
 
 

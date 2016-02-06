@@ -4,7 +4,7 @@ from string import Template as sTemplate
 
 from breve.util import Namespace, escape, quoteattrs, caller
 from breve.flatten import flatten, register_flattener
-import _conditionals as C
+from . import _conditionals as C
 
 conditionals = dict([
     (k, v) for k, v in C.__dict__.items()
@@ -103,10 +103,10 @@ class Tag(object):
             children = []
             for k, v in o.attrs.items():
                 o.attrs[k] = sTemplate(v).safe_substitute(data)
-            for idx, c in enumerate(o.children):
+            for c in o.children:
                 if isinstance(c, Tag):
                     children.append(traverse(copy(c), data))
-                elif isinstance(c, basestring):
+                elif isinstance(c, str):
                     children.append(sTemplate(c).safe_substitute(data))
             o.children = children
             return o
@@ -137,7 +137,7 @@ class Tag(object):
         return self
 
 
-class Proto(unicode):
+class Proto(str):
     __slots__ = ['Class']
     Class = Tag
 
@@ -148,10 +148,10 @@ class Proto(unicode):
         return self.Class(self)[children]
 
     def __str__(self):
-        return unicode(self.Class(self))
+        return str(self.Class(self))
 
 
-class cdata(unicode):
+class cdata(str):
 
     def __init__(self, children):
         self.children = children
@@ -180,7 +180,7 @@ class _invisible(Proto):
 invisible = _invisible('invisible')
 
 
-class xml(unicode):
+class xml(str):
     pass
 
 
@@ -188,7 +188,7 @@ def flatten_xml(o):
     return o
 
 
-class comment(unicode):
+class comment(str):
     pass
 
 
@@ -238,10 +238,9 @@ register_flattener(list, flatten_sequence)
 register_flattener(tuple, flatten_sequence)
 register_flattener(Proto, flatten_proto)
 register_flattener(Tag, flatten_tag)
-register_flattener(str, lambda s: escape(unicode(s, 'utf-8')))
-register_flattener(unicode, escape)
+register_flattener(str, escape)
 register_flattener(Invisible, flatten_invisible)
-register_flattener(cdata, unicode)
+register_flattener(cdata, str)
 register_flattener(comment, flatten_comment)
 register_flattener(xml, flatten_xml)
 register_flattener(type(lambda: None), flatten_callable)

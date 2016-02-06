@@ -2,13 +2,12 @@
 
 import sys
 import os
-import doctest
 import unittest
 
 if __name__ == '__main__':
     # force import from source directory rather than site-packages
     sys.path.insert(0, os.path.abspath('../..'))
-    import breve
+    import breve  # @UnusedImport
 
 from breve.tags.html import tags
 from breve.tags.entities import entities
@@ -18,7 +17,7 @@ try:
     souptests = True
 except ImportError:
     souptests = False
-from breve.tests.lib import diff, test_root, template_root, my_name, expected_output
+from breve.tests.lib import diff, test_root, template_root, expected_output
 
 
 class Soup2BreveTestCase(unittest.TestCase):
