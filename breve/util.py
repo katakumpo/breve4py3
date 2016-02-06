@@ -68,7 +68,7 @@ def caller():
 
 
 class PrettyPrinter(object):
-    '''not happy with this - should happen at the flattener level'''
+    """not happy with this - should happen at the flattener level"""
 
     def __init__(self, indent=2):
         self.indent = indent

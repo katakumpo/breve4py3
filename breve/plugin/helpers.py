@@ -3,10 +3,10 @@ from breve.tags.html import tags
 
 
 def render_decorator(template, **template_kw):
-    '''
+    """
     decorator for turning a dict and a breve 
     template into flattened output
-    '''
+    """
     def _template(f):
         def _render(*args, **kw):
             t = Template(tags, **template_kw)
@@ -17,5 +17,5 @@ def render_decorator(template, **template_kw):
 
 
 def render_middleware(environ, start_response):
-    ''' soon! '''
+    """ soon! """
     return

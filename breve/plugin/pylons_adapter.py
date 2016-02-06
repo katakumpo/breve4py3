@@ -1,7 +1,7 @@
-'''
+"""
 Simple adapter for Pylons 0.9.7 and greater.  
 Earlier versions of Pylons should use the Buffet adapter.
-'''
+"""
 
 from pylons.templating import pylons_globals
 from breve import Template

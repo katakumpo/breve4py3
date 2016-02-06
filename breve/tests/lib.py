@@ -17,7 +17,7 @@ def diff(actual, expected):
 
 
 def log_output(actual, expected):
-    ''' not used '''
+    """ not used """
     test_name = callers_name()
     open('tmp/%s-actual.html' % test_name, 'w').write(actual)
     open('tmp/%s-expected.html' % test_name, 'w').write(expected)

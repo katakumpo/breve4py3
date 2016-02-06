@@ -22,7 +22,7 @@ from breve.tests.lib import my_name
 class SerializationTestCase(unittest.TestCase):
 
     def test_tag_serialization(self):
-        '''basic tag flattening'''
+        """basic tag flattening"""
 
         T = tags
         template = T.html[
@@ -37,13 +37,13 @@ class SerializationTestCase(unittest.TestCase):
         )
 
     def test_inlineJS(self):
-        '''inline Javascript flattening'''
+        """inline Javascript flattening"""
 
-        js = '''
+        js = """
             if (x=1) {
                 y=2;
             }
-        '''
+        """
         T = tags
         template = T.html[
             T.body[
@@ -57,13 +57,13 @@ class SerializationTestCase(unittest.TestCase):
         )
 
     def test_minJS(self):
-        '''inline minified Javascript flattening'''
+        """inline minified Javascript flattening"""
 
-        js = '''
+        js = """
             if (x=1) {
                 y=2;
             }
-        '''
+        """
         T = tags
         template = T.html[
             T.body[
@@ -77,7 +77,7 @@ class SerializationTestCase(unittest.TestCase):
         )
 
     def test_unicode(self):
-        '''unicode and string coercion'''
+        """unicode and string coercion"""
 
         T = tags
         template = T.html[
@@ -98,7 +98,7 @@ class SerializationTestCase(unittest.TestCase):
         )
 
     def test_unicode_attributes(self):
-        '''unicode and string coercion in attributes'''
+        """unicode and string coercion in attributes"""
 
         T = tags
         template = T.html[
@@ -118,7 +118,7 @@ class SerializationTestCase(unittest.TestCase):
         )
 
     def test_test(self):
-        '''test() function'''
+        """test() function"""
 
         T = tags
         template = T.html[
@@ -140,7 +140,7 @@ class SerializationTestCase(unittest.TestCase):
         )
 
     def test_escaping(self):
-        '''escaping, xml() directive'''
+        """escaping, xml() directive"""
 
         T = tags
         template = T.html[
@@ -149,7 +149,7 @@ class SerializationTestCase(unittest.TestCase):
                 T.div(style='width: 400px;<should be &escaped&>')[
                     T.p(class_='foo')['&&&'],
                     T.p['Coffee', E.nbsp, E.amp, E.nbsp, 'cream'],
-                    xml ('''<div>this should be <u>unescaped</u> &amp; unaltered.</div>''')
+                    xml ("""<div>this should be <u>unescaped</u> &amp; unaltered.</div>""")
                 ]
             ]
         ]
@@ -163,7 +163,7 @@ class SerializationTestCase(unittest.TestCase):
         )
 
     def test_tag_multiplication(self):
-        '''tag multiplication'''
+        """tag multiplication"""
 
         T = tags
         url_data = [
@@ -190,7 +190,7 @@ class SerializationTestCase(unittest.TestCase):
         )
 
     def test_flatten_callable(self):
-        '''test flattening of callables'''
+        """test flattening of callables"""
 
         def my_callable():
             return "Hello, World"
@@ -215,7 +215,7 @@ class SerializationTestCase(unittest.TestCase):
 class MacrosTestCase(unittest.TestCase):
 
     def test_macros(self):
-        '''test macros'''
+        """test macros"""
 
         T = tags
         url_data = [
@@ -248,7 +248,7 @@ class MacrosTestCase(unittest.TestCase):
         )
 
     def test_nested_macros(self):
-        '''test nested macros'''
+        """test nested macros"""
 
         T = tags
         url_data = [
@@ -284,7 +284,7 @@ class MacrosTestCase(unittest.TestCase):
         )
 
     def test_tag_multiplication_with_macro(self):
-        '''tag multiplication including macro'''
+        """tag multiplication including macro"""
 
         T = tags
         url_data = [
@@ -316,7 +316,7 @@ class MacrosTestCase(unittest.TestCase):
         )
 
     def test_let(self):
-        '''let directive'''
+        """let directive"""
 
         T = tags
         template = (
@@ -333,7 +333,7 @@ class MacrosTestCase(unittest.TestCase):
         )
 
     def test_assign(self):
-        '''assign directive'''
+        """assign directive"""
 
         T = tags
         template = (
@@ -350,7 +350,7 @@ class MacrosTestCase(unittest.TestCase):
         )
 
     def test_assign_with_macro(self):
-        '''assign directive with macro'''
+        """assign directive with macro"""
 
         T = tags
         template = (
@@ -374,7 +374,7 @@ class MacrosTestCase(unittest.TestCase):
 class DOMTestCase(unittest.TestCase):
 
     def test_dom_traversal(self):
-        '''tag.walk() DOM traversal'''
+        """tag.walk() DOM traversal"""
 
         T = tags
         template = T.html[
@@ -398,7 +398,7 @@ class DOMTestCase(unittest.TestCase):
         )
 
     def test_dom_traversal_from_macro(self):
-        '''macro abuse: self-traversing template'''
+        """macro abuse: self-traversing template"""
 
         T = tags
         template = (
@@ -426,7 +426,7 @@ class DOMTestCase(unittest.TestCase):
                     T.div(class_='text', id='main-content')[
                         T.img(src='/images/breve-logo.png', alt='breve logo'),
                         T.br,
-                        T.span (class_='bold') [ '''Hello from Breve!''' ]
+                        T.span (class_='bold') [ """Hello from Breve!""" ]
                     ]
                 ), css_results(selectors)]
             ]
@@ -448,7 +448,7 @@ class DOMTestCase(unittest.TestCase):
 class CustomTagsTestCase(unittest.TestCase):
 
     def test_custom_tags(self):
-        '''custom tags'''
+        """custom tags"""
 
         from breve.tests.sitemap import tags, xmlns
         T = Namespace(tags)
@@ -477,7 +477,7 @@ class CustomTagsTestCase(unittest.TestCase):
         )
 
     def test_dynamic_tags(self):
-        '''test dynamic creation of tags'''
+        """test dynamic creation of tags"""
 
         template = (
             assign('mytag', Tag('mytag')),
@@ -495,7 +495,7 @@ class CustomTagsTestCase(unittest.TestCase):
         )
 
     def test_auto_tags(self):
-        '''test AutoTag class'''
+        """test AutoTag class"""
 
         T = AutoTag()
         template = (

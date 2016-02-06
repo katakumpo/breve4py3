@@ -74,8 +74,8 @@ class Html2Breve(HTMLParser):
         else:
             bquote = equote = '"'
             if '\n' in data:
-                bquote = "'''\n%s" % ( ' ' * self.__depth )
-                equote = "\n%s'''" % ( ' ' * self.__depth )
+                bquote = "'''\n%s" % (' ' * self.__depth)
+                equote = "\n%s'''" % (' ' * self.__depth)
                 data = data.replace('\n', '\n' + ' ' * self.__depth)
 
             self.__out.write('%s\n%s%s%s%s' % (
@@ -91,13 +91,13 @@ class Html2Breve(HTMLParser):
     def handle_startjs(self, tag, attrs):
         self.__injs = True
         self.__jsdepth = self.__indent
-        self.__out.write (  "\n%sinlineJS ( '''" % ( ' ' * self.__depth ) )
+        self.__out.write ("\n%sinlineJS ( '''" % (' ' * self.__depth))
         self.__prev = tag
 
     def handle_endjs(self, tag):
         self.__injs = False
         self.__jsdepth = 0
-        self.__out.write (  "%s''' )," % ( ' ' * self.__depth ) )
+        self.__out.write ("%s''' )," % (' ' * self.__depth))
         self.__prev = tag
 
     def handle_entityref(self, name):
@@ -114,10 +114,10 @@ class Html2Breve(HTMLParser):
 
 
 def usage():
-    print '''
+    print """
         Usage:
             %s <htmlfile>
-    ''' % sys.argv [ 0 ]
+    """ % sys.argv [ 0 ]
 
 if __name__ == '__main__':
     if len(sys.argv) < 2:

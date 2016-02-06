@@ -5,8 +5,8 @@ from breve.tags.html import HtmlEmptyProto, HtmlProto, empty_tag_names, tags as 
 
 xmlns = None
 xml_encoding = None
-doctype = '''<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">'''
-strict_doctype = '''<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">'''
+doctype = """<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">"""
+strict_doctype = """<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">"""
 
 # a class to handle empty tags in html4 format
 

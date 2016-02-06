@@ -1,8 +1,8 @@
 #!/usr/bin/env python
 
-'''
+"""
 A simple WSGI webserver for testing Breve templates.
-'''
+"""
 
 import sys
 from optparse import OptionParser

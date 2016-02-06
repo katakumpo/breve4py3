@@ -3,8 +3,8 @@ from breve.tags import Proto, Tag, Namespace, cdata, xml, flatten_tag, flatten_p
 from breve.tags.jsmin import jsmin
 
 xmlns = "http://www.w3.org/1999/xhtml"
-doctype = '''<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-              "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">\n'''
+doctype = """<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+              "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">\n"""
 
 #
 # Despite what one might think, empty elements aren't really
@@ -116,7 +116,7 @@ option = custom_tag('option', flattener=flatten_option)
 
 
 class lorem_ipsum(Tag):
-    ''' silliness ensues '''
+    """ silliness ensues """
     children = [
         'Lorem ipsum dolor sit amet, consectetuer adipiscing elit.',
         'In egestas nisl sit amet odio.',

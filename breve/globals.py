@@ -42,10 +42,10 @@ def pop(key):
 
 
 def get_stack(stack):
-    '''mostly for debugging'''
+    """mostly for debugging"""
     return __stacks[stack]
 
 
 def get_stacks():
-    '''mostly for debugging'''
+    """mostly for debugging"""
     return __stacks

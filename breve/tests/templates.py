@@ -21,7 +21,7 @@ from breve.tests.lib import diff, template_root, my_name, expected_output
 class TemplateTestCase(unittest.TestCase):
 
     def test_instantiation_parameters(self):
-        '''test instantiation parameters'''
+        """test instantiation parameters"""
         # change the defaults to something else
         args = {
             'tidy': True,
@@ -35,7 +35,7 @@ class TemplateTestCase(unittest.TestCase):
             self.failUnless(getattr(t, k) == v)
 
     def test_render_parameters(self):
-        '''test render-time parameters'''
+        """test render-time parameters"""
 
         vars = dict(
             message='hello, from breve',
@@ -53,7 +53,7 @@ class TemplateTestCase(unittest.TestCase):
             self.failUnless(getattr(t, k) == v)
 
     def test_simple_template(self):
-        '''simple template'''
+        """simple template"""
 
         vars = dict(
             message='hello, from breve',
@@ -69,7 +69,7 @@ class TemplateTestCase(unittest.TestCase):
             raise
 
     def test_include(self):
-        '''include() directive'''
+        """include() directive"""
 
         vars = dict(
             message='hello, from breve',
@@ -85,7 +85,7 @@ class TemplateTestCase(unittest.TestCase):
             raise
 
     def test_nested_include(self):
-        '''nested include() directives'''
+        """nested include() directives"""
 
         vars = dict(
             message='hello, from breve',
@@ -101,7 +101,7 @@ class TemplateTestCase(unittest.TestCase):
             raise
 
     def test_loop_include(self):
-        '''looping over include() with listcomp'''
+        """looping over include() with listcomp"""
 
         vars = dict(
             message='hello, from breve',
@@ -117,7 +117,7 @@ class TemplateTestCase(unittest.TestCase):
             raise
 
     def test_let_directive(self):
-        '''test let directive'''
+        """test let directive"""
 
         vars = dict(
             message='hello, from breve',
@@ -133,7 +133,7 @@ class TemplateTestCase(unittest.TestCase):
             raise
 
     def test_let_directive_scope(self):
-        '''test let directive's scope'''
+        """test let directive's scope"""
 
         vars = dict(
             message='hello, from breve',
@@ -160,7 +160,7 @@ class TemplateTestCase(unittest.TestCase):
         )
 
     def test_assign_scope(self):
-        '''test assign directive's scope'''
+        """test assign directive's scope"""
 
         vars = dict(
             message='hello, from breve',
@@ -178,7 +178,7 @@ class TemplateTestCase(unittest.TestCase):
             raise
 
     def test_include_macros(self):
-        '''define macros via include() directive'''
+        """define macros via include() directive"""
 
         vars = dict(
             message='hello, from breve',
@@ -194,7 +194,7 @@ class TemplateTestCase(unittest.TestCase):
             raise
 
     def test_nested_include_macros(self):
-        '''define macros inside nested include() directives'''
+        """define macros inside nested include() directives"""
 
         vars = dict(
             message='hello, from breve',
@@ -210,7 +210,7 @@ class TemplateTestCase(unittest.TestCase):
             raise
 
     def test_loop_macros(self):
-        '''loop using macro'''
+        """loop using macro"""
 
         vars = dict(
             message='hello, from breve',
@@ -231,7 +231,7 @@ class TemplateTestCase(unittest.TestCase):
             raise
 
     def test_macro_includes(self):
-        '''include() directive inside macro'''
+        """include() directive inside macro"""
 
         vars = dict(
             message='hello, from breve',
@@ -247,7 +247,7 @@ class TemplateTestCase(unittest.TestCase):
             raise
 
     def test_simple_inheritance(self):
-        '''simple inheritance'''
+        """simple inheritance"""
 
         vars = dict(
             message='hello, from breve',
@@ -264,7 +264,7 @@ class TemplateTestCase(unittest.TestCase):
             raise
 
     def test_nested_inheritance(self):
-        '''nested inheritance'''
+        """nested inheritance"""
 
         vars = dict(
             message='hello, from breve',
@@ -280,7 +280,7 @@ class TemplateTestCase(unittest.TestCase):
             raise
 
     def test_macros_inside_inherits(self):
-        '''test macros inside inherits(): scope issues'''
+        """test macros inside inherits(): scope issues"""
 
         # note: I'm not convinced this is the desired behaviour, but
         # it's *compatible* behaviour.
@@ -299,7 +299,7 @@ class TemplateTestCase(unittest.TestCase):
             raise
 
     def test_register_global(self):
-        '''register_global() function'''
+        """register_global() function"""
 
         vars = dict(
             title=my_name()
@@ -317,7 +317,7 @@ class TemplateTestCase(unittest.TestCase):
             raise
 
     def test_stacks(self):
-        '''test stacks (push/pop)'''
+        """test stacks (push/pop)"""
 
         push(a=1, b=2)
         self.failUnless(
@@ -325,7 +325,7 @@ class TemplateTestCase(unittest.TestCase):
         )
 
     def test_stacks_template(self):
-        '''test stacks in template'''
+        """test stacks in template"""
 
         vars = dict(
             title=my_name(),
@@ -345,7 +345,7 @@ class TemplateTestCase(unittest.TestCase):
         self.failUnless(not get_stacks())
 
     def test_register_flattener(self):
-        '''register_flattener() function'''
+        """register_flattener() function"""
 
         def flatten_date(o):
             return escape(o.strftime('%Y/%m/%d'))
@@ -367,7 +367,7 @@ class TemplateTestCase(unittest.TestCase):
             raise
 
     def test_custom_renderer(self):
-        '''custom renderer'''
+        """custom renderer"""
 
         def render_row(tag, data):
             T = html
@@ -395,7 +395,7 @@ class TemplateTestCase(unittest.TestCase):
             raise
 
     def test_custom_renderer_notag(self):
-        '''custom renderer returning non-Tag type'''
+        """custom renderer returning non-Tag type"""
 
         def render_text(tag, data):
             tag.clear()
@@ -416,7 +416,7 @@ class TemplateTestCase(unittest.TestCase):
             raise
 
     def test_custom_loader(self):
-        '''custom loader'''
+        """custom loader"""
 
         class PathLoader(object):
             __slots__ = ['paths']
@@ -458,7 +458,7 @@ class TemplateTestCase(unittest.TestCase):
             raise
 
     def test_custom_loader_stack(self):
-        '''custom loader stack'''
+        """custom loader stack"""
 
         class PathLoader(object):
             __slots__ = ['paths']
@@ -501,7 +501,7 @@ class TemplateTestCase(unittest.TestCase):
             raise
 
     def test_encoding(self):
-        '''encoding comments'''
+        """encoding comments"""
 
         vars = dict(
             title=my_name()
@@ -521,7 +521,7 @@ class TemplateTestCase(unittest.TestCase):
 class TemplateMemoryTestCase(unittest.TestCase):
 
     def test_let_memory_freed(self):
-        '''test that let() objects are freed'''
+        """test that let() objects are freed"""
 
         # is this even meaningful?
 

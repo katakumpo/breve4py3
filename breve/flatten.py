@@ -16,7 +16,7 @@ def unregister_flattener(o):
 
 
 def registry():
-    '''mostly for debugging'''
+    """mostly for debugging"""
     return __registry
 
 

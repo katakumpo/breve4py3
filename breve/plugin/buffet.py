@@ -18,7 +18,7 @@ class BreveTemplatePlugin(object):
         self.breve_opts = {}
 
     def get_config(self, vars):
-        '''
+        """
         Different frameworks provide needed config info at different times
         and in different ways (notably TurboGears and Pylons), so I've wrapped
         up this messy code here.  It's sad and inefficient that we can't count
@@ -29,7 +29,7 @@ class BreveTemplatePlugin(object):
         Breve now allows a url-style syntax in the template name to bypass the
         brokenness in the various frameworks, e.g.:
             index?format=html&debug=1
-        '''
+        """
         breve_opts = {
             'root': '.',
             'namespace': '',

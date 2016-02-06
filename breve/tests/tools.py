@@ -24,7 +24,7 @@ from breve.tests.lib import diff, test_root, template_root, my_name, expected_ou
 class Soup2BreveTestCase(unittest.TestCase):
 
     def test_soup2breve(self):
-        ''' round-trip some html '''
+        """ round-trip some html """
 
         breve_source = ''.join(
             convert_file(
@@ -54,7 +54,7 @@ from breve.plugin.helpers import render_decorator
 class PluginHelpersTestCase(unittest.TestCase):
 
     def test_render_decorator(self):
-        '''test helpers.render_decorator'''
+        """test helpers.render_decorator"""
 
         @render_decorator('index', root=template_root(), namespace='v')
         def render_test():

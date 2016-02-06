@@ -29,26 +29,26 @@ class Macro(object):
 
 
 def macro(name, function):
-    '''create a named reference to an anonymous function in the global namespace'''
+    """create a named reference to an anonymous function in the global namespace"""
     m = Macro(name, function)
     caller().f_globals[name] = m
     return m
 
 
 def assign(name, value):
-    '''create a named reference to an object in the global namespace'''
+    """create a named reference to an object in the global namespace"""
     caller().f_globals[name] = value
     return ''
 
 
 def let(**kw):
-    '''create named references to objects in the current context's local namespace'''
+    """create named references to objects in the current context's local namespace"""
     caller().f_locals.update(kw)
     return ''
 
 
 class AutoTag(object):
-    '''dynamically create tags'''
+    """dynamically create tags"""
 
     def __getattr__(self, name):
         return Tag(name)
@@ -198,7 +198,7 @@ def flatten_comment(o):
 
 
 def flattened_tags(o):
-    '''generator that yields flattened tags'''
+    """generator that yields flattened tags"""
     def flattened(o):
         if o.render:
             o = o.render(o, o.data)
@@ -248,7 +248,7 @@ register_flattener(Macro, flatten_macro)
 
 
 def custom_tag(tag_name, class_name=None, flattener=flatten_tag, attrs=None):
-    ''' class factory for defining tags with custom type (i.e. not of class Tag) '''
+    """ class factory for defining tags with custom type (i.e. not of class Tag) """
 
     if not class_name:
         class_name = tag_name

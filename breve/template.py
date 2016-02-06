@@ -38,11 +38,11 @@ class Template(object):
             setattr(T, _a, kw.get(_a, getattr(T, _a)))
 
     def __init__(T, tags, root='.', xmlns=None, doctype=None, **kw):
-        '''
+        """
         Uses "T" rather than "self" to avoid confusion with
         subclasses that refer to this class via scoping (see
         the "inherits" class for one example).
-        '''
+        """
         T._update_params(**kw)
 
         class inherits(Tag):
@@ -76,7 +76,7 @@ class Template(object):
 
         T.root = root
         T.xmlns = xmlns
-        T.xml_encoding = '''<?xml version="1.0" encoding="UTF-8"?>'''
+        T.xml_encoding = """<?xml version="1.0" encoding="UTF-8"?>"""
         T.doctype = doctype
         T.fragments = {}
         T.render_path = []  # not needed but potentially useful
@@ -106,9 +106,9 @@ class Template(object):
             T.tags[T.autotags] = AutoTag()
 
     def include(T, template, vars=None, loader=None):
-        '''
+        """
         evalutes template fragment(s) in the current (caller's) context
-        '''
+        """
         if type(template) is types.StringType:
             template = [template]
 
@@ -131,9 +131,9 @@ class Template(object):
         return results
 
     # def old_include ( T, template, vars = None, loader = None ):
-    #     '''
+    #     """
     #     evalutes a template fragment in the current (caller's) context
-    #     '''
+    #     """
     #     locals = { }
     #     if vars:
     #         locals.update ( vars )

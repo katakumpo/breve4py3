@@ -21,7 +21,7 @@ from breve.tests.lib import my_name
 class MacrosTestCase(unittest.TestCase):
 
     def test_autotable_macro(self):
-        '''test autotable macro'''
+        """test autotable macro"""
 
         data = [
             ['One', 'Two', 'Three', 'Four'],
@@ -70,7 +70,7 @@ class MacrosTestCase(unittest.TestCase):
         )
 
     def test_autolist_macro(self):
-        '''test autolist macro'''
+        """test autolist macro"""
 
         data = ["Item %s" % _i for _i in range(1, 9)]
 
@@ -97,7 +97,7 @@ class MacrosTestCase(unittest.TestCase):
         )
 
     def test_autolist_macro(self):
-        '''test autolist macro'''
+        """test autolist macro"""
 
         sublist1 = ["List 1:%s" % _i for _i in range(3)]
         sublist2 = ["List 2:%s" % _i for _i in range(3, 6)]
@@ -143,7 +143,7 @@ class MacrosTestCase(unittest.TestCase):
         )
 
     def test_toc_macro(self):
-        '''test table-of-contents macro'''
+        """test table-of-contents macro"""
 
         template = (
             assign('TOC', []),

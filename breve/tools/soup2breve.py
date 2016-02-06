@@ -1,8 +1,8 @@
-'''
+"""
 soup2breve - Robert Leftwich
 
 Requires BeautifulSoup - http://www.crummy.com/software/BeautifulSoup/
-'''
+"""
 
 import sys
 import codecs
@@ -185,10 +185,10 @@ def convert_file(filename, handlers):
 
 
 def usage():
-    print '''
+    print """
         Usage:
             %s <htmlfile> <outfile>
-    ''' % sys.argv [ 0 ]
+    """ % sys.argv [ 0 ]
 
 if __name__ == '__main__':
     if len(sys.argv) < 3:
