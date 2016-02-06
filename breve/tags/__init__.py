@@ -147,7 +147,6 @@ class Proto(str):
         return self.Class(self)[children]
 
 
-
 class cdata(str):
 
     def __init__(self, children):
@@ -235,6 +234,7 @@ register_flattener(list, flatten_sequence)
 register_flattener(tuple, flatten_sequence)
 register_flattener(Proto, flatten_proto)
 register_flattener(Tag, flatten_tag)
+register_flattener(bytes, lambda x: x.decode('utf8'))
 register_flattener(str, escape)
 register_flattener(Invisible, flatten_invisible)
 register_flattener(cdata, str)
