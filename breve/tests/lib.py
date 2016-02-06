@@ -1,26 +1,6 @@
 # -*- coding: utf-8 -*-
-import difflib
 import os
 import sys
-
-
-def diff(actual, expected):
-    print("\n=" * 80)
-    print(actual)
-    print("-" * 80)
-    d = difflib.Differ()
-    result = d.compare(actual.splitlines(), expected.splitlines())
-    for l in result:
-        if not l.startswith(' '):
-            print(l)
-    print("=\n" * 80)
-
-
-def log_output(actual, expected):
-    """ not used """
-    test_name = callers_name()
-    open('tmp/%s-actual.html' % test_name, 'w').write(actual)
-    open('tmp/%s-expected.html' % test_name, 'w').write(expected)
 
 
 def my_name():
