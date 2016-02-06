@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from breve.flatten import register_flattener
-from breve.tags import Proto, Tag, Namespace, flatten_tag, custom_tag
+from breve.tags import Namespace, Proto, Tag, custom_tag, flatten_tag
 from breve.tags.jsmin import jsmin
 
 xmlns = "http://www.w3.org/1999/xhtml"

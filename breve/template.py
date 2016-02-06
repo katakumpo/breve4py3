@@ -3,13 +3,14 @@
 import pydoc
 import sys
 
-from breve.util import Namespace, caller
-from breve.tags import Tag, xml, invisible, cdata, comment, conditionals, check, macro, assign, let, AutoTag
-from breve.tags.entities import entities
-from breve.flatten import flatten
-from breve.loaders import FileLoader
 from breve.cache import Cache
-from breve.globals import get_globals, push, pop
+from breve.flatten import flatten
+from breve.globals import get_globals, pop, push
+from breve.loaders import FileLoader
+from breve.tags import (AutoTag, Tag, assign, cdata, check, comment, conditionals, invisible, let,
+                        macro, xml)
+from breve.tags.entities import entities
+from breve.util import Namespace, caller
 
 try:
     import tidy as tidylib

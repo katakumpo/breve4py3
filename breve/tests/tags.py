@@ -1,21 +1,12 @@
 # -*- coding: utf-8 -*-
-
-import sys
-import os
 import unittest
 
-if __name__ == '__main__':
-    # force import from source directory rather than site-packages
-    sys.path.insert(0, os.path.abspath('../..'))
-    import breve  # @UnusedImport
-
-from breve.tags import Tag, AutoTag
-from breve.tags.html import tags
-from breve.tags.entities import entities as E
-from breve.tags import macro, assign, xml, check, let
 from breve.flatten import flatten
-from breve.util import Namespace
+from breve.tags import AutoTag, Tag, assign, check, let, macro, xml
+from breve.tags.entities import entities as E
+from breve.tags.html import tags
 from breve.tests.lib import my_name
+from breve.util import Namespace
 
 
 class SerializationTestCase(unittest.TestCase):

@@ -1,23 +1,18 @@
 # -*- coding: utf-8 -*-
-
-import sys
 import os
 import unittest
 
-if __name__ == '__main__':
-    # force import from source directory rather than site-packages
-    sys.path.insert(0, os.path.abspath('../..'))
-    import breve  # @UnusedImport
-
-from breve.tags.html import tags
-from breve.tags.entities import entities
 from breve.flatten import flatten
+from breve.plugin.helpers import render_decorator
+from breve.tags.entities import entities
+from breve.tags.html import tags
+from breve.tests.lib import diff, expected_output, template_root, test_root
+
 try:
     from breve.tools.soup2breve import convert_file, meta_handler
     souptests = True
 except ImportError:
     souptests = False
-from breve.tests.lib import diff, test_root, template_root, expected_output
 
 
 class Soup2BreveTestCase(unittest.TestCase):
@@ -48,7 +43,6 @@ class Soup2BreveTestCase(unittest.TestCase):
             diff(actual, expected)
             raise
 
-from breve.plugin.helpers import render_decorator
 
 
 class PluginHelpersTestCase(unittest.TestCase):

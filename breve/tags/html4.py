@@ -1,8 +1,9 @@
 # -*- coding: utf-8 -*-
-from breve.util import quoteattrs
 from breve.flatten import register_flattener
-from breve.tags import Tag, Namespace
-from breve.tags.html import HtmlProto, empty_tag_names, tags as htmltags
+from breve.tags import Namespace, Tag
+from breve.tags.html import tags as htmltags
+from breve.tags.html import HtmlProto, empty_tag_names
+from breve.util import quoteattrs
 
 xmlns = None
 xml_encoding = None

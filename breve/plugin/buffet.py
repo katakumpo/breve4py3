@@ -1,8 +1,9 @@
 # -*- coding: utf-8 -*-
 import os
+from urllib.parse import splitquery
+
 from breve import Template
 from breve.tags import html
-from urllib.parse import splitquery
 
 
 class BreveTemplatePlugin(object):

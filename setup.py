@@ -1,9 +1,7 @@
 # -*- coding: utf-8 -*-
-import sys
-sys.path.insert(0, '.')
-import breve
+from setuptools import find_packages, setup
 
-from setuptools import setup, find_packages
+import breve
 
 setup(
     name='Breve',

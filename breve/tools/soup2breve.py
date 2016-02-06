@@ -5,11 +5,11 @@ soup2breve - Robert Leftwich
 Requires BeautifulSoup - http://www.crummy.com/software/BeautifulSoup/
 """
 
-import sys
 import codecs
 import html
+import sys
 
-from bs4 import BeautifulSoup, NavigableString, Comment
+from bs4 import BeautifulSoup, Comment, NavigableString
 
 DEFAULT_ENCODING = 'utf-8'
 INDENT = '   '

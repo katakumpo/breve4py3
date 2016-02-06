@@ -5,6 +5,7 @@ Earlier versions of Pylons should use the Buffet adapter.
 """
 
 from pylons.templating import pylons_globals
+
 from breve import Template
 from breve.tags.html import tags
 

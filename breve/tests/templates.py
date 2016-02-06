@@ -1,19 +1,12 @@
 # -*- coding: utf-8 -*-
-
 import os
-import sys
 import unittest
 from datetime import datetime
 
-if __name__ == '__main__':
-    # force import from source directory rather than site-packages
-    sys.path.insert(0, os.path.abspath('../..'))
-    import breve  # @UnusedImport
-
+from breve import Template, escape, register_flattener, register_global
+from breve.globals import get_stacks, pop, push
 from breve.tags.html import tags as html
-from breve import Template, register_flattener, register_global, escape
-from breve.globals import push, pop, get_stacks
-from breve.tests.lib import diff, template_root, my_name, expected_output
+from breve.tests.lib import diff, expected_output, my_name, template_root
 
 
 class TemplateTestCase(unittest.TestCase):

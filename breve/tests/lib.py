@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
-import sys
-import os
 import difflib
+import os
+import sys
 
 
 def diff(actual, expected):

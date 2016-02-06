@@ -1,11 +1,12 @@
 # -*- coding: utf-8 -*-
-from breve import Template
-from breve.tags import html
+from django.conf import settings
 from django.http import HttpResponse
 from django.template import Context, TemplateDoesNotExist
 from django.utils.translation import gettext_lazy as _
 
-from django.conf import settings
+from breve import Template
+from breve.tags import html
+
 BREVE_ROOT = settings.BREVE_ROOT
 
 try:
