@@ -12,7 +12,7 @@ if __name__ == '__main__':
 from breve.tags import Tag, AutoTag
 from breve.tags.html import tags
 from breve.tags.entities import entities as E
-from breve.tags import macro, assign, xml, test, let
+from breve.tags import macro, assign, xml, check, let
 from breve.flatten import flatten
 from breve.util import Namespace
 from breve.tests.lib import my_name
@@ -123,10 +123,10 @@ class SerializationTestCase(unittest.TestCase):
         template = T.html[
             T.head[T.title[my_name()]],
             T.body[
-                test(1 == 1) and (
+                check(1 == 1) and (
                     T.span['This is displayed']
                 ),
-                test(1 == 0) and (
+                check(1 == 0) and (
                     T.span['This is not displayed']
                 )
             ]

@@ -4,7 +4,7 @@ import pydoc
 import sys
 
 from breve.util import Namespace, caller
-from breve.tags import Tag, xml, invisible, cdata, comment, conditionals, test, macro, assign, let, AutoTag
+from breve.tags import Tag, xml, invisible, cdata, comment, conditionals, check, macro, assign, let, AutoTag
 from breve.tags.entities import entities
 from breve.flatten import flatten
 from breve.loaders import FileLoader
@@ -81,7 +81,7 @@ class Template(object):
         T.vars = Namespace({'xmlns': xmlns})
         T.tags = {'cdata': cdata,
                   'xml': xml,
-                  'test': test,
+                  'check': check,
                   'push': push,
                   'pop': pop,
                   'let': let,
