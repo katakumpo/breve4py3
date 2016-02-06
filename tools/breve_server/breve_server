@@ -212,10 +212,10 @@ if __name__ == '__main__':
     options, args = parser.parse_args()
 
     httpd = make_server(options.interface, int(options.port), BreveApp(options, args))
-    print "Serving on %s:%s..." % (options.interface, options.port)
+    print("Serving on %s:%s..." % (options.interface, options.port))
 
     try:
         httpd.serve_forever()
     except KeyboardInterrupt:
-        print "Halting by user intervention"
+        print("Halting by user intervention")
         raise SystemExit

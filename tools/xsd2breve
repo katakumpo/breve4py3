@@ -45,8 +45,8 @@ if __name__ == '__main__':
     try:
         url = sys.argv[1]
     except IndexError:
-        print "\nUsage: %s <url>" % sys.argv[0]
-        print "       e.g. %s %s\n" % (sys.argv[0], 'http://www.google.com/schemas/sitemap/0.84/sitemap.xsd')
+        print("\nUsage: %s <url>" % sys.argv[0])
+        print("       e.g. %s %s\n" % (sys.argv[0], 'http://www.google.com/schemas/sitemap/0.84/sitemap.xsd'))
     else:
         parser = make_parser()
         parser.setContentHandler(TagGenerator(xmlns=url))

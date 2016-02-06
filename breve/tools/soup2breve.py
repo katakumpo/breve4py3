@@ -186,10 +186,7 @@ def convert_file(filename, handlers):
 
 
 def usage():
-    print """
-        Usage:
-            %s <htmlfile> <outfile>
-    """ % sys.argv [ 0 ]
+    print("\n        Usage:\n            %s <htmlfile> <outfile>\n    " % sys.argv[0])
 
 if __name__ == '__main__':
     if len(sys.argv) < 3:

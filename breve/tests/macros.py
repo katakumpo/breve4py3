@@ -182,7 +182,7 @@ class MacrosTestCase(unittest.TestCase):
         )
 
         actual = flatten(template)
-        # print actual
+        # print(actual)
 
 
 def suite():

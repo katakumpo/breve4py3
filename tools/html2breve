@@ -115,10 +115,7 @@ class Html2Breve(HTMLParser):
 
 
 def usage():
-    print """
-        Usage:
-            %s <htmlfile>
-    """ % sys.argv [ 0 ]
+    print("\n        Usage:\n            %s <htmlfile>\n    " % sys.argv[0])
 
 if __name__ == '__main__':
     if len(sys.argv) < 2:

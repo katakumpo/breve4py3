@@ -6,15 +6,15 @@ from pprint import pprint
 
 
 def diff(actual, expected):
-    print "\n=" * 80
-    print actual
-    print "-" * 80
+    print("\n=" * 80)
+    print(actual)
+    print("-" * 80)
     d = difflib.Differ()
     result = d.compare(actual.splitlines(), expected.splitlines())
     for l in result:
         if not l.startswith(' '):
-            print l
-    print "=\n" * 80
+            print(l)
+    print("=\n" * 80)
 
 
 def log_output(actual, expected):
