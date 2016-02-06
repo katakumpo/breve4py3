@@ -107,49 +107,6 @@ class TemplateTestCase(unittest.TestCase):
             diff(actual, expected)
             raise
 
-    def test_let_directive(self):
-        """test let directive"""
-
-        params = dict(
-            message='hello, from breve',
-            title=my_name()
-        )
-        t = Template(html, root=template_root())
-        actual = t.render('index', params, namespace='v')
-        expected = expected_output()
-        try:
-            self.assertEqual(actual, expected)
-        except AssertionError:
-            diff(actual, expected)
-            raise
-
-    def test_let_directive_scope(self):
-        """test let directive's scope"""
-
-        params = dict(
-            message='hello, from breve',
-            title=my_name(),
-            do_fail=False
-        )
-
-        # don't fail - use variable in scope
-        t = Template(html, root=template_root())
-        actual = t.render('index', params, namespace='v')
-        expected = expected_output()
-        try:
-            self.assertEqual(actual, expected)
-        except AssertionError:
-            diff(actual, expected)
-            raise
-
-        # do fail - try to use the variable out of scope
-        params['do_fail'] = True
-        t = Template(html, root=template_root())
-        self.failUnlessRaises(
-            NameError,
-            t.render, 'index', params, namespace='v'
-        )
-
     def test_assign_scope(self):
         """test assign directive's scope"""
 

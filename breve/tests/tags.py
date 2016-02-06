@@ -2,7 +2,7 @@
 import unittest
 
 from breve.flatten import flatten
-from breve.tags import AutoTag, Tag, assign, check, let, macro, xml
+from breve.tags import AutoTag, Tag, assign, check, macro, xml
 from breve.tags.entities import entities as E
 from breve.tags.html import tags
 from breve.tests.lib import my_name
@@ -303,23 +303,6 @@ class MacrosTestCase(unittest.TestCase):
              '<body><ul><li class="link"><a href="http://www.google.com">Google</a></li>'
              '<li class="link"><a href="http://www.yahoo.com">Yahoo!</a></li>'
              '<li class="link"><a href="http://www.amazon.com">Amazon</a></li></ul></body></html>')
-        )
-
-    def test_let(self):
-        """let directive"""
-
-        T = tags
-        template = (
-            let(msg='okay'),
-            T.html[
-                T.head[T.title[my_name()]],
-                T.body[T.div[msg]]  # @UndefinedVariable
-            ]
-        )
-        output = flatten(template)
-        self.assertEqual(
-            output,
-            '<html><head><title>test_let</title></head><body><div>okay</div></body></html>'
         )
 
     def test_assign(self):

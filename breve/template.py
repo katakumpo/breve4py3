@@ -7,7 +7,7 @@ from breve.cache import Cache
 from breve.flatten import flatten
 from breve.globals import get_globals, pop, push
 from breve.loaders import FileLoader
-from breve.tags import (AutoTag, Tag, assign, cdata, check, comment, conditionals, invisible, let,
+from breve.tags import (AutoTag, Tag, assign, cdata, check, comment, conditionals, invisible,
                         macro, xml)
 from breve.tags.entities import entities
 from breve.util import Namespace, caller
@@ -85,7 +85,6 @@ class Template(object):
                   'check': check,
                   'push': push,
                   'pop': pop,
-                  'let': let,
                   'macro': macro,
                   'assign': assign,
                   'comment': comment,

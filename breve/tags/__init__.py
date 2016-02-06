@@ -43,12 +43,6 @@ def assign(name, value):
     return ''
 
 
-def let(**kw):
-    """create named references to objects in the current context's local namespace"""
-    caller().f_locals.update(kw)
-    return ''
-
-
 class AutoTag(object):
     """dynamically create tags"""
 
